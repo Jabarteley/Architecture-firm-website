@@ -34,15 +34,15 @@ export default async function GalleryPage() {
   const galleryItems = await supabaseUtils.getGalleryItems();
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-primary-very-light-brown">
       {/* Hero Section */}
-      <div className="relative bg-stone-50 py-24 sm:py-32">
+      <div className="relative bg-primary-light-brown py-24 sm:py-32">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center">
-            <h1 className="text-4xl font-extrabold text-stone-900 sm:text-5xl sm:tracking-tight lg:text-6xl">
+          <div className="text-center fade-in">
+            <h1 className="text-4xl font-extrabold text-primary-deep-brown sm:text-5xl sm:tracking-tight lg:text-6xl">
               Project Gallery
             </h1>
-            <p className="mt-6 max-w-2xl mx-auto text-xl text-stone-600">
+            <p className="mt-6 max-w-2xl mx-auto text-xl text-primary-dark-brown">
               Visual journey through our architectural masterpieces and design innovations.
             </p>
           </div>
@@ -56,31 +56,31 @@ export default async function GalleryPage() {
             <div className="inline-flex rounded-md shadow-sm" role="group">
               <button
                 type="button"
-                className="px-4 py-2 text-sm font-medium text-stone-900 bg-stone-100 border border-stone-200 rounded-l-lg hover:bg-stone-200"
+                className="px-4 py-2 text-sm font-medium text-primary-deep-brown bg-primary-light-brown border border-primary-dark-brown rounded-l-lg hover:bg-primary-dark-brown hover:text-white"
               >
                 All
               </button>
               <button
                 type="button"
-                className="px-4 py-2 text-sm font-medium text-stone-900 bg-stone-100 border-t border-b border-stone-200 hover:bg-stone-200"
+                className="px-4 py-2 text-sm font-medium text-primary-deep-brown bg-primary-light-brown border-t border-b border-primary-dark-brown hover:bg-primary-dark-brown hover:text-white"
               >
                 Interior
               </button>
               <button
                 type="button"
-                className="px-4 py-2 text-sm font-medium text-stone-900 bg-stone-100 border-t border-b border-stone-200 hover:bg-stone-200"
+                className="px-4 py-2 text-sm font-medium text-primary-deep-brown bg-primary-light-brown border-t border-b border-primary-dark-brown hover:bg-primary-dark-brown hover:text-white"
               >
                 Exterior
               </button>
               <button
                 type="button"
-                className="px-4 py-2 text-sm font-medium text-stone-900 bg-stone-100 border border-stone-200 hover:bg-stone-200"
+                className="px-4 py-2 text-sm font-medium text-primary-deep-brown bg-primary-light-brown border-t border-b border-primary-dark-brown hover:bg-primary-dark-brown hover:text-white"
               >
                 Concept
               </button>
               <button
                 type="button"
-                className="px-4 py-2 text-sm font-medium text-stone-900 bg-stone-100 border-t border-b border-stone-200 rounded-r-lg hover:bg-stone-200"
+                className="px-4 py-2 text-sm font-medium text-primary-deep-brown bg-primary-light-brown border border-primary-dark-brown rounded-r-lg hover:bg-primary-dark-brown hover:text-white"
               >
                 Master Plans
               </button>
