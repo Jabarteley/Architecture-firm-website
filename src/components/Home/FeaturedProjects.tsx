@@ -8,24 +8,25 @@ export default function FeaturedProjects({ projects }: { projects: Project[] }) 
   }
 
   return (
-    <section className="py-16 bg-stone-50">
+    <section className="py-16 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center">
-          <h2 className="text-base font-semibold text-amber-600 tracking-wide uppercase">Featured Works</h2>
-          <p className="mt-2 text-3xl font-extrabold text-stone-900 sm:text-4xl">
+        <div className="text-center fade-in">
+          <h2 className="text-base font-semibold text-primary-dark-brown tracking-wide uppercase">Featured Works</h2>
+          <p className="mt-2 text-3xl font-extrabold text-primary-deep-brown sm:text-4xl">
             Our Projects
           </p>
-          <p className="mt-4 max-w-2xl text-xl text-stone-600 mx-auto">
+          <p className="mt-4 max-w-2xl text-xl text-gray-600 mx-auto">
             Explore our portfolio of innovative architectural solutions.
           </p>
         </div>
 
         <div className="mt-10">
           <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
-            {projects.map((project) => (
-              <div 
-                key={project.id} 
-                className="bg-white rounded-lg shadow overflow-hidden hover:shadow-lg transition-shadow duration-300"
+            {projects.map((project, index) => (
+              <div
+                key={project.id}
+                className={`bg-white rounded-lg shadow overflow-hidden hover:shadow-xl transition-all duration-300 hover-lift slide-up`}
+                style={{ animationDelay: `${index * 0.1}s` }}
               >
                 <div className="h-48 overflow-hidden">
                   {project.images && project.images.length > 0 ? (
@@ -44,19 +45,19 @@ export default function FeaturedProjects({ projects }: { projects: Project[] }) 
                 </div>
                 <div className="p-6">
                   <div className="flex items-center justify-between">
-                    <h3 className="text-lg font-medium text-stone-900">{project.title}</h3>
-                    <span className="inline-flex items-center px-3 py-0.5 rounded-full text-sm font-medium bg-amber-100 text-amber-800">
+                    <h3 className="text-lg font-medium text-primary-deep-brown">{project.title}</h3>
+                    <span className="inline-flex items-center px-3 py-0.5 rounded-full text-sm font-medium bg-primary-light-brown text-primary-dark-brown">
                       {project.category}
                     </span>
                   </div>
-                  <p className="mt-2 text-base text-stone-600 line-clamp-2">
+                  <p className="mt-2 text-base text-gray-600 line-clamp-2">
                     {project.description.substring(0, 100)}...
                   </p>
                   <div className="mt-4 flex items-center justify-between">
-                    <span className="text-sm text-stone-500">{project.location}</span>
+                    <span className="text-sm text-gray-500">{project.location}</span>
                     <Link
                       href={`/projects/${project.id}`}
-                      className="text-amber-600 font-medium hover:text-amber-500"
+                      className="text-primary-dark-brown font-medium hover:text-primary-deep-brown"
                     >
                       View details
                     </Link>
@@ -67,10 +68,10 @@ export default function FeaturedProjects({ projects }: { projects: Project[] }) 
           </div>
         </div>
 
-        <div className="mt-12 text-center">
+        <div className="mt-12 text-center fade-in">
           <Link
             href="/projects"
-            className="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-amber-700 hover:bg-amber-800"
+            className="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-primary-dark-brown hover:bg-primary-deep-brown"
           >
             View All Projects
           </Link>

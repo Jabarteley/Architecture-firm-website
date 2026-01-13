@@ -16,7 +16,7 @@ export const metadata: Metadata = {
     type: 'website',
     images: [
       {
-        url: '/og-image-home.jpg',
+        url: 'https://medium.com/@matt-sharon/architecture-explained-phases-of-designing-building-a-project-e6d8a2a72945',
         width: 1200,
         height: 630,
         alt: 'Architecture Firm Home',
@@ -42,11 +42,32 @@ export default async function HomePage() {
   ]);
 
   return (
-    <main>
+    <main className="overflow-x-hidden">
       <HeroSection />
-      <ServicesOverview services={services.slice(0, 4)} />
-      <FeaturedProjects projects={projects} />
-      <Testimonials />
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-16">
+        <div className="text-center mb-16 fade-in">
+          <h2 className="text-4xl font-bold text-primary-dark-brown mb-4">Our Expertise</h2>
+          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            We specialize in creating architectural solutions that blend aesthetics with functionality,
+            creating spaces that inspire and endure.
+          </p>
+        </div>
+        <ServicesOverview services={services.slice(0, 4)} />
+      </div>
+      <div className="bg-primary-light-brown py-16">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16 fade-in">
+            <h2 className="text-4xl font-bold text-primary-deep-brown mb-4">Featured Projects</h2>
+            <p className="text-xl text-primary-deep-brown max-w-3xl mx-auto">
+              Explore our portfolio of innovative architectural solutions.
+            </p>
+          </div>
+          <FeaturedProjects projects={projects} />
+        </div>
+      </div>
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-16">
+        <Testimonials />
+      </div>
       <CallToAction />
     </main>
   );

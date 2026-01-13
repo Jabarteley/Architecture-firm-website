@@ -1,26 +1,80 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
+  --background: #f9f5f2; /* Light cream background */
   --foreground: #171717;
+  --primary-light-brown: #dcb68a; /* Light tan brown */
+  --primary-dark-brown: #8b4121; /* Rich brown */
+  --primary-deep-brown: #773f1a; /* Deep brown */
+  --primary-orange-brown: #aa5522; /* Orange-brown accent */
+  --neutral-stone: #78716c; /* Stone-500 */
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-primary-light-brown: var(--primary-light-brown);
+  --color-primary-dark-brown: var(--primary-dark-brown);
+  --color-primary-deep-brown: var(--primary-deep-brown);
+  --color-primary-orange-brown: var(--primary-orange-brown);
+  --color-neutral-stone: var(--neutral-stone);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: #3c2a21; /* Dark brown background */
+    --foreground: #f9f5f2;
   }
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans);
+}
+
+/* Custom animations */
+.fade-in {
+  animation: fadeIn 0.6s ease-out forwards;
+}
+
+.slide-up {
+  animation: slideUp 0.5s ease-out forwards;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { 
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to { 
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Hover effects */
+.hover-lift {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.hover-lift:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+/* Gradient backgrounds */
+.bg-primary-gradient {
+  background: linear-gradient(135deg, var(--primary-dark-brown), var(--primary-orange-brown));
+}
+
+.bg-secondary-gradient {
+  background: linear-gradient(135deg, var(--primary-deep-brown), var(--primary-light-brown));
 }

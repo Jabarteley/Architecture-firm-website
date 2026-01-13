@@ -1,68 +1,52 @@
-'use client';
+import { createClient } from '@/lib/supabase-server';
+import { redirect } from 'next/navigation';
 
-import { useState } from 'react';
-import { supabase } from '@/lib/supabase';
-import { ContactSubmission } from '@/utils/supabase-utils';
+export default async function ContactPage({ searchParams }: { searchParams: { success?: string } }) {
+  const supabase = createClient();
 
-export default function ContactPage() {
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    phone: '',
-    message: ''
-  });
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitSuccess, setSubmitSuccess] = useState(false);
-  const [submitError, setSubmitError] = useState('');
+  const handleSubmit = async (formData: FormData) => {
+    'use server';
+    
+    const name = formData.get('name') as string;
+    const email = formData.get('email') as string;
+    const phone = formData.get('phone') as string;
+    const message = formData.get('message') as string;
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({
-      ...prev,
-      [name]: value
-    }));
-  };
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-    setSubmitError('');
-
-    try {
-      // Validate form data
-      if (!formData.name || !formData.email || !formData.message) {
-        throw new Error('Please fill in all required fields');
-      }
-
-      // Validate email format
-      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-      if (!emailRegex.test(formData.email)) {
-        throw new Error('Please enter a valid email address');
-      }
-
-      // Submit form data to Supabase
-      const { error } = await supabase
-        .from('contact_submissions')
-        .insert([{
-          name: formData.name,
-          email: formData.email,
-          phone: formData.phone,
-          message: formData.message
-        }]);
-
-      if (error) {
-        throw error;
-      }
-
-      setSubmitSuccess(true);
-      setFormData({ name: '', email: '', phone: '', message: '' });
-    } catch (error) {
-      console.error('Error submitting contact form:', error);
-      setSubmitError(error instanceof Error ? error.message : 'An error occurred while submitting the form');
-    } finally {
-      setIsSubmitting(false);
+    // Validate form data
+    if (!name || !email || !message) {
+      // In a real app, you would handle this differently
+      console.error('Please fill in all required fields');
+      return;
     }
+
+    // Validate email format
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      console.error('Please enter a valid email address');
+      return;
+    }
+
+    // Submit form data to Supabase
+    const { error } = await supabase
+      .from('contact_submissions')
+      .insert([{
+        name,
+        email,
+        phone,
+        message
+      }]);
+
+    if (error) {
+      console.error('Error submitting contact form:', error);
+      return;
+    }
+
+    // Redirect after successful submission
+    redirect('/contact?success=true');
   };
+
+  // Check for success query param
+  const success = searchParams.success;
 
   return (
     <div className="min-h-screen bg-white">
@@ -169,12 +153,12 @@ export default function ContactPage() {
                   Have a project in mind? Drop us a line and our team will get back to you within 24 hours.
                 </p>
 
-                {submitSuccess ? (
+                {success === 'true' ? (
                   <div className="mt-6 rounded-md bg-green-50 p-4">
                     <div className="flex">
                       <div className="flex-shrink-0">
                         <svg className="h-5 w-5 text-green-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
-                          <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                          <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clipRule="evenodd" />
                         </svg>
                       </div>
                       <div className="ml-3">
@@ -186,7 +170,7 @@ export default function ContactPage() {
                     </div>
                   </div>
                 ) : (
-                  <form onSubmit={handleSubmit} className="mt-6 grid grid-cols-1 gap-y-6 sm:grid-cols-2 sm:gap-x-8">
+                  <form action={handleSubmit} className="mt-6 grid grid-cols-1 gap-y-6 sm:grid-cols-2 sm:gap-x-8">
                     <div>
                       <label htmlFor="name" className="block text-sm font-medium text-stone-700">
                         Name *
@@ -197,8 +181,6 @@ export default function ContactPage() {
                           name="name"
                           id="name"
                           required
-                          value={formData.name}
-                          onChange={handleChange}
                           className="py-3 px-4 block w-full shadow-sm text-stone-900 focus:ring-amber-500 focus:border-amber-500 border-stone-300 rounded-md"
                         />
                       </div>
@@ -214,8 +196,6 @@ export default function ContactPage() {
                           name="email"
                           id="email"
                           required
-                          value={formData.email}
-                          onChange={handleChange}
                           className="py-3 px-4 block w-full shadow-sm text-stone-900 focus:ring-amber-500 focus:border-amber-500 border-stone-300 rounded-md"
                         />
                       </div>
@@ -230,8 +210,6 @@ export default function ContactPage() {
                           type="tel"
                           name="phone"
                           id="phone"
-                          value={formData.phone}
-                          onChange={handleChange}
                           className="py-3 px-4 block w-full shadow-sm text-stone-900 focus:ring-amber-500 focus:border-amber-500 border-stone-300 rounded-md"
                         />
                       </div>
@@ -247,37 +225,17 @@ export default function ContactPage() {
                           name="message"
                           rows={4}
                           required
-                          value={formData.message}
-                          onChange={handleChange}
                           className="py-3 px-4 block w-full shadow-sm text-stone-900 focus:ring-amber-500 focus:border-amber-500 border-stone-300 rounded-md"
                         ></textarea>
                       </div>
                     </div>
                     
-                    {submitError && (
-                      <div className="sm:col-span-2">
-                        <div className="rounded-md bg-red-50 p-4">
-                          <div className="flex">
-                            <div className="flex-shrink-0">
-                              <svg className="h-5 w-5 text-red-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
-                                <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clipRule="evenodd" />
-                              </svg>
-                            </div>
-                            <div className="ml-3">
-                              <h3 className="text-sm font-medium text-red-800">{submitError}</h3>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    )}
-                    
                     <div className="sm:col-span-2">
                       <button
                         type="submit"
-                        disabled={isSubmitting}
-                        className="w-full inline-flex items-center justify-center px-6 py-3 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-amber-700 hover:bg-amber-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-amber-500 disabled:opacity-50"
+                        className="w-full inline-flex items-center justify-center px-6 py-3 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-amber-700 hover:bg-amber-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-amber-500"
                       >
-                        {isSubmitting ? 'Sending...' : 'Send Message'}
+                        Send Message
                       </button>
                     </div>
                   </form>

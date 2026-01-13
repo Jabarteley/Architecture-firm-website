@@ -1,5 +1,34 @@
+import { Metadata } from 'next';
 import { supabaseUtils } from '@/utils/supabase-utils';
 import BlogCard from '@/components/Blog/BlogCard';
+
+export const metadata: Metadata = {
+  title: 'Insights & News',
+  description: 'Stay updated with the latest trends, project updates, and architectural insights from our experts.',
+  keywords: ['architecture blog', 'industry news', 'design trends', 'project updates', 'architectural insights'],
+  openGraph: {
+    title: 'Insights & News | Architecture Firm',
+    description: 'Stay updated with the latest trends, project updates, and architectural insights from our experts.',
+    type: 'website',
+    images: [
+      {
+        url: '/og-image-blog.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'Architecture Firm Blog',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Insights & News | Architecture Firm',
+    description: 'Stay updated with the latest trends, project updates, and architectural insights from our experts.',
+    images: ['/og-image-blog.jpg'],
+  },
+  alternates: {
+    canonical: 'https://www.architecturefirm.com/blog',
+  },
+};
 
 export default async function BlogPage() {
   const blogPosts = await supabaseUtils.getBlogPosts();
