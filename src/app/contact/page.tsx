@@ -1,9 +1,10 @@
 import { createClient } from '@/lib/supabase-server';
 import { redirect } from 'next/navigation';
+import React from 'react';
 
 export const dynamic = 'force-dynamic';
 
-export default async function ContactPage({ searchParams }: { searchParams: { success?: string } }) {
+export default function ContactPage({ searchParams }: { searchParams: { success?: string } }) {
 
   const handleSubmit = async (formData: FormData) => {
     'use server';
@@ -49,7 +50,8 @@ export default async function ContactPage({ searchParams }: { searchParams: { su
   };
 
   // Check for success query param
-  const success = searchParams.success;
+  const resolvedSearchParams = React.use(searchParams);
+  const success = resolvedSearchParams.success === 'true';
 
   return (
     <div className="min-h-screen bg-primary-very-light-brown">
@@ -156,7 +158,7 @@ export default async function ContactPage({ searchParams }: { searchParams: { su
                   Have an architecture, construction or civil engineering project in mind? Drop us a line and our team will get back to you within 24 hours.
                 </p>
 
-                {searchParams.success === 'true' ? (
+                {success ? (
                   <div className="mt-6 rounded-md bg-green-50 p-4">
                     <div className="flex">
                       <div className="flex-shrink-0">
