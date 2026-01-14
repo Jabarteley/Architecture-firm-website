@@ -128,8 +128,8 @@ CREATE TABLE IF NOT EXISTS pages (
 );
 
 -- Insert default site settings
-INSERT INTO site_settings (site_title, site_description) 
-VALUES ('Architecture Firm', 'Professional Architecture and Civil Engineering Services')
+INSERT INTO site_settings (site_title, site_description)
+VALUES ('DesignBuild Engineers', 'Professional Architecture, Construction and Civil Engineering Services')
 ON CONFLICT DO NOTHING;
 
 -- Insert default admin user (password should be securely hashed in production)

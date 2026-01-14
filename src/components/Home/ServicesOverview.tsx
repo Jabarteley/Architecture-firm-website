@@ -8,10 +8,10 @@ export default function ServicesOverview({ services }: { services: Service[] }) 
         <div className="text-center fade-in">
           <h2 className="text-base font-semibold text-primary-dark-brown tracking-wide uppercase">Our Expertise</h2>
           <p className="mt-2 text-3xl font-extrabold text-primary-deep-brown sm:text-4xl">
-            Architectural Services
+            Our Services
           </p>
           <p className="mt-4 max-w-2xl text-xl text-gray-600 mx-auto">
-            We offer comprehensive architectural and engineering solutions tailored to your unique needs.
+            We offer comprehensive architectural, construction and civil engineering solutions tailored to your unique needs.
           </p>
         </div>
 

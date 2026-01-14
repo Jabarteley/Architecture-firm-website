@@ -4,11 +4,11 @@ import ServiceCard from '@/components/Services/ServiceCard';
 
 export const metadata: Metadata = {
   title: 'Our Services',
-  description: 'Explore our comprehensive architectural and engineering services including residential architecture, commercial design, urban planning, and interior design.',
-  keywords: ['architecture services', 'engineering services', 'residential architecture', 'commercial design', 'urban planning', 'interior design'],
+  description: 'Explore our comprehensive architectural, construction and civil engineering services including residential architecture, commercial design, urban planning, construction management, and infrastructure development.',
+  keywords: ['architecture services', 'construction services', 'civil engineering services', 'residential architecture', 'commercial design', 'urban planning', 'construction management', 'infrastructure development'],
   openGraph: {
     title: 'Our Services | Architecture Firm',
-    description: 'Explore our comprehensive architectural and engineering services including residential architecture, commercial design, urban planning, and interior design.',
+    description: 'Explore our comprehensive architectural, construction and civil engineering services including residential architecture, commercial design, urban planning, construction management, and infrastructure development.',
     type: 'website',
     images: [
       {
@@ -22,7 +22,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'Our Services | Architecture Firm',
-    description: 'Explore our comprehensive architectural and engineering services including residential architecture, commercial design, urban planning, and interior design.',
+    description: 'Explore our comprehensive architectural, construction and civil engineering services including residential architecture, commercial design, urban planning, construction management, and infrastructure development.',
     images: ['/og-image-services.jpg'],
   },
   alternates: {
@@ -43,7 +43,7 @@ export default async function ServicesPage() {
               Our Services
             </h1>
             <p className="mt-6 max-w-2xl mx-auto text-xl text-primary-dark-brown">
-              Comprehensive architectural and engineering solutions tailored to your needs.
+              Comprehensive architectural, construction and civil engineering solutions tailored to your needs.
             </p>
           </div>
         </div>

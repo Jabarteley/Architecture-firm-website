@@ -84,7 +84,7 @@ export default function ServiceForm({
                 id="title"
                 value={formData.title}
                 onChange={handleChange}
-                className={`block w-full shadow-sm focus:ring-amber-500 focus:border-amber-500 sm:text-sm border-stone-300 rounded-md ${
+                className={`block w-full shadow-sm focus:ring-amber-500 focus:border-amber-500 sm:text-sm border-stone-300 rounded-md text-stone-900 ${
                   errors.title ? 'border-red-300' : ''
                 }`}
               />
@@ -103,7 +103,7 @@ export default function ServiceForm({
                 rows={4}
                 value={formData.description || ''}
                 onChange={handleChange}
-                className={`block w-full shadow-sm focus:ring-amber-500 focus:border-amber-500 sm:text-sm border-stone-300 rounded-md ${
+                className={`block w-full shadow-sm focus:ring-amber-500 focus:border-amber-500 sm:text-sm border-stone-300 rounded-md text-stone-900 ${
                   errors.description ? 'border-red-300' : ''
                 }`}
               />

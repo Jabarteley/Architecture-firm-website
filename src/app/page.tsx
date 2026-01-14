@@ -8,11 +8,11 @@ import CallToAction from '@/components/Home/CallToAction';
 
 export const metadata: Metadata = {
   title: 'Home',
-  description: 'Professional Architecture and Civil Engineering Services. We design innovative architectural solutions that blend aesthetics with functionality, creating spaces that inspire and endure.',
-  keywords: ['architecture', 'civil engineering', 'design', 'construction', 'building', 'architectural firm'],
+  description: 'Professional Architecture, Construction and Civil Engineering Services. We design, create and build innovative architectural solutions that blend aesthetics with functionality, creating spaces that inspire and endure.',
+  keywords: ['architecture', 'construction', 'civil engineering', 'design', 'building', 'architectural firm', 'construction services', 'civil engineering projects'],
   openGraph: {
-    title: 'Architecture Firm | Professional Architecture and Civil Engineering Services',
-    description: 'Professional Architecture and Civil Engineering Services. We design innovative architectural solutions that blend aesthetics with functionality, creating spaces that inspire and endure.',
+    title: 'Architecture Firm | Professional Architecture, Construction and Civil Engineering Services',
+    description: 'Professional Architecture, Construction and Civil Engineering Services. We design, create and build innovative architectural solutions that blend aesthetics with functionality, creating spaces that inspire and endure.',
     type: 'website',
     images: [
       {
@@ -25,8 +25,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Architecture Firm | Professional Architecture and Civil Engineering Services',
-    description: 'Professional Architecture and Civil Engineering Services. We design innovative architectural solutions that blend aesthetics with functionality, creating spaces that inspire and endure.',
+    title: 'Architecture Firm | Professional Architecture, Construction and Civil Engineering Services',
+    description: 'Professional Architecture, Construction and Civil Engineering Services. We design, create and build innovative architectural solutions that blend aesthetics with functionality, creating spaces that inspire and endure.',
     images: ['/og-image-home.jpg'],
   },
   alternates: {
@@ -48,7 +48,7 @@ export default async function HomePage() {
         <div className="text-center mb-16 fade-in">
           <h2 className="text-4xl font-bold text-primary-dark-brown mb-4">Our Expertise</h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            We specialize in creating architectural solutions that blend aesthetics with functionality,
+            We specialize in architecture, construction, and civil engineering - designing, creating, and building innovative solutions that blend aesthetics with functionality,
             creating spaces that inspire and endure.
           </p>
         </div>

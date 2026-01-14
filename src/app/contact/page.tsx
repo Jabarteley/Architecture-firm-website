@@ -61,7 +61,7 @@ export default async function ContactPage({ searchParams }: { searchParams: { su
               Get in Touch
             </h1>
             <p className="mt-6 max-w-2xl mx-auto text-xl text-primary-dark-brown">
-              Have a project in mind? Reach out to our team of architectural experts.
+              Have a project in mind? Reach out to our team of architectural, construction and engineering experts.
             </p>
           </div>
         </div>
@@ -153,7 +153,7 @@ export default async function ContactPage({ searchParams }: { searchParams: { su
               <div className="bg-primary-light-brown py-8 px-6 sm:py-10 sm:px-10 rounded-lg shadow-md">
                 <h2 className="text-2xl font-bold text-primary-deep-brown">Send us a message</h2>
                 <p className="mt-2 text-primary-dark-brown">
-                  Have a project in mind? Drop us a line and our team will get back to you within 24 hours.
+                  Have an architecture, construction or civil engineering project in mind? Drop us a line and our team will get back to you within 24 hours.
                 </p>
 
                 {searchParams.success === 'true' ? (

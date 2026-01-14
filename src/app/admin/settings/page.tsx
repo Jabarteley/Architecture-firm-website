@@ -130,7 +130,7 @@ export default function SettingsPage() {
                     id="site_title"
                     value={settings.site_title}
                     onChange={handleChange}
-                    className="block w-full shadow-sm focus:ring-amber-500 focus:border-amber-500 sm:text-sm border-stone-300 rounded-md"
+                    className="block w-full shadow-sm focus:ring-amber-500 focus:border-amber-500 sm:text-sm border-stone-300 rounded-md text-stone-900"
                   />
                 </div>
               </div>
@@ -146,7 +146,7 @@ export default function SettingsPage() {
                     rows={3}
                     value={settings.site_description}
                     onChange={handleChange}
-                    className="block w-full shadow-sm focus:ring-amber-500 focus:border-amber-500 sm:text-sm border-stone-300 rounded-md"
+                    className="block w-full shadow-sm focus:ring-amber-500 focus:border-amber-500 sm:text-sm border-stone-300 rounded-md text-stone-900"
                   />
                 </div>
               </div>
@@ -162,7 +162,7 @@ export default function SettingsPage() {
                     id="contact_email"
                     value={settings.contact_email}
                     onChange={handleChange}
-                    className="block w-full shadow-sm focus:ring-amber-500 focus:border-amber-500 sm:text-sm border-stone-300 rounded-md"
+                    className="block w-full shadow-sm focus:ring-amber-500 focus:border-amber-500 sm:text-sm border-stone-300 rounded-md text-stone-900"
                   />
                 </div>
               </div>
@@ -178,7 +178,7 @@ export default function SettingsPage() {
                     id="contact_phone"
                     value={settings.contact_phone}
                     onChange={handleChange}
-                    className="block w-full shadow-sm focus:ring-amber-500 focus:border-amber-500 sm:text-sm border-stone-300 rounded-md"
+                    className="block w-full shadow-sm focus:ring-amber-500 focus:border-amber-500 sm:text-sm border-stone-300 rounded-md text-stone-900"
                   />
                 </div>
               </div>
@@ -194,7 +194,7 @@ export default function SettingsPage() {
                     rows={2}
                     value={settings.office_address}
                     onChange={handleChange}
-                    className="block w-full shadow-sm focus:ring-amber-500 focus:border-amber-500 sm:text-sm border-stone-300 rounded-md"
+                    className="block w-full shadow-sm focus:ring-amber-500 focus:border-amber-500 sm:text-sm border-stone-300 rounded-md text-stone-900"
                   />
                 </div>
               </div>
@@ -300,7 +300,7 @@ export default function SettingsPage() {
                           });
                         }}
                         placeholder={`https://${platform}.com/youraccount`}
-                        className="mt-1 block w-full shadow-sm focus:ring-amber-500 focus:border-amber-500 sm:text-sm border-stone-300 rounded-md"
+                        className="mt-1 block w-full shadow-sm focus:ring-amber-500 focus:border-amber-500 sm:text-sm border-stone-300 rounded-md text-stone-900"
                       />
                     </div>
                   ))}

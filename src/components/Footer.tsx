@@ -8,9 +8,9 @@ const Footer = () => {
       <div className="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div>
-            <h3 className="text-lg font-semibold text-white">ArchFirm</h3>
+            <h3 className="text-lg font-semibold text-white">DesignBuild Engineers</h3>
             <p className="mt-4 text-stone-300 text-sm">
-              Creating architectural excellence with innovation, sustainability, and timeless design.
+              Designing, creating and building architectural excellence with innovation, sustainability, and timeless design.
             </p>
             <div className="mt-4 flex space-x-6">
               <a href="#" className="text-stone-400 hover:text-amber-500">
@@ -39,8 +39,8 @@ const Footer = () => {
             <ul className="mt-4 space-y-4">
               <li><a href="/services#residential" className="text-stone-300 hover:text-white text-sm">Residential Architecture</a></li>
               <li><a href="/services#commercial" className="text-stone-300 hover:text-white text-sm">Commercial Design</a></li>
-              <li><a href="/services#urban-planning" className="text-stone-300 hover:text-white text-sm">Urban Planning</a></li>
-              <li><a href="/services#interior-design" className="text-stone-300 hover:text-white text-sm">Interior Design</a></li>
+              <li><a href="/services#construction" className="text-stone-300 hover:text-white text-sm">Construction Services</a></li>
+              <li><a href="/services#civil-engineering" className="text-stone-300 hover:text-white text-sm">Civil Engineering</a></li>
             </ul>
           </div>
 
@@ -67,7 +67,7 @@ const Footer = () => {
 
         <div className="mt-12 border-t border-stone-700 pt-8 flex flex-col md:flex-row justify-between items-center">
           <p className="text-stone-400 text-sm">
-            &copy; {currentYear} ArchFirm. All rights reserved.
+            &copy; {currentYear} DesignBuild Engineers. All rights reserved.
           </p>
           <div className="mt-4 md:mt-0">
             <nav className="flex space-x-6">

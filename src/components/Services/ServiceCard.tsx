@@ -23,7 +23,7 @@ export default function ServiceCard({ service }: { service: Service }) {
       <div className="flex-1 p-6 flex flex-col justify-between">
         <div className="flex-1">
           <p className="text-sm font-medium text-amber-600">
-            Service
+            Architecture, Construction & Engineering
           </p>
           <Link href={`/services/${service.id}`} className="block mt-2">
             <p className="text-xl font-semibold text-stone-900">{service.title}</p>

@@ -102,7 +102,7 @@ export default function ProjectForm({
                 id="title"
                 value={formData.title}
                 onChange={handleChange}
-                className={`block w-full shadow-sm focus:ring-amber-500 focus:border-amber-500 sm:text-sm border-stone-300 rounded-md ${
+                className={`block w-full shadow-sm focus:ring-amber-500 focus:border-amber-500 sm:text-sm border-stone-300 rounded-md text-stone-900 ${
                   errors.title ? 'border-red-300' : ''
                 }`}
               />
@@ -120,7 +120,7 @@ export default function ProjectForm({
                 name="category"
                 value={formData.category}
                 onChange={handleChange}
-                className={`block w-full pl-3 pr-10 py-2 text-base border-stone-300 focus:outline-none focus:ring-amber-500 focus:border-amber-500 sm:text-sm rounded-md ${
+                className={`block w-full pl-3 pr-10 py-2 text-base border-stone-300 focus:outline-none focus:ring-amber-500 focus:border-amber-500 sm:text-sm rounded-md text-stone-900 ${
                   errors.category ? 'border-red-300' : ''
                 }`}
               >
@@ -146,7 +146,7 @@ export default function ProjectForm({
                 id="client"
                 value={formData.client || ''}
                 onChange={handleChange}
-                className="block w-full shadow-sm focus:ring-amber-500 focus:border-amber-500 sm:text-sm border-stone-300 rounded-md"
+                className="block w-full shadow-sm focus:ring-amber-500 focus:border-amber-500 sm:text-sm border-stone-300 rounded-md text-stone-900"
               />
             </div>
           </div>
@@ -162,7 +162,7 @@ export default function ProjectForm({
                 id="location"
                 value={formData.location || ''}
                 onChange={handleChange}
-                className={`block w-full shadow-sm focus:ring-amber-500 focus:border-amber-500 sm:text-sm border-stone-300 rounded-md ${
+                className={`block w-full shadow-sm focus:ring-amber-500 focus:border-amber-500 sm:text-sm border-stone-300 rounded-md text-stone-900 ${
                   errors.location ? 'border-red-300' : ''
                 }`}
               />
@@ -181,7 +181,7 @@ export default function ProjectForm({
                 id="completion_date"
                 value={formData.completion_date || ''}
                 onChange={handleChange}
-                className="block w-full shadow-sm focus:ring-amber-500 focus:border-amber-500 sm:text-sm border-stone-300 rounded-md"
+                className="block w-full shadow-sm focus:ring-amber-500 focus:border-amber-500 sm:text-sm border-stone-300 rounded-md text-stone-900"
               />
             </div>
           </div>
@@ -232,7 +232,7 @@ export default function ProjectForm({
                 rows={4}
                 value={formData.description || ''}
                 onChange={handleChange}
-                className={`block w-full shadow-sm focus:ring-amber-500 focus:border-amber-500 sm:text-sm border-stone-300 rounded-md ${
+                className={`block w-full shadow-sm focus:ring-amber-500 focus:border-amber-500 sm:text-sm border-stone-300 rounded-md text-stone-900 ${
                   errors.description ? 'border-red-300' : ''
                 }`}
               />

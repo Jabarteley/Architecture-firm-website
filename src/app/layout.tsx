@@ -17,34 +17,34 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: {
-    template: '%s | Architecture Firm',
-    default: 'Architecture Firm | Professional Architecture and Civil Engineering Services',
+    template: '%s | DesignBuild Engineers',
+    default: 'DesignBuild Engineers | Professional Architecture, Construction and Civil Engineering Services',
   },
-  description: "Professional Architecture and Civil Engineering Services",
-  keywords: ['architecture', 'civil engineering', 'design', 'construction', 'building'],
-  authors: [{ name: 'Architecture Firm' }],
-  creator: 'Architecture Firm',
-  publisher: 'Architecture Firm',
+  description: "Professional Architecture, Construction and Civil Engineering Services",
+  keywords: ['architecture', 'construction', 'civil engineering', 'design', 'building', 'construction services', 'civil engineering projects'],
+  authors: [{ name: 'DesignBuild Engineers' }],
+  creator: 'DesignBuild Engineers',
+  publisher: 'DesignBuild Engineers',
   openGraph: {
     type: 'website',
     locale: 'en_US',
-    url: 'https://www.architecturefirm.com',
-    siteName: 'Architecture Firm',
-    title: 'Architecture Firm | Professional Architecture and Civil Engineering Services',
-    description: "Professional Architecture and Civil Engineering Services",
+    url: 'https://www.designbuildengineers.com',
+    siteName: 'DesignBuild Engineers',
+    title: 'DesignBuild Engineers | Professional Architecture, Construction and Civil Engineering Services',
+    description: "Professional Architecture, Construction and Civil Engineering Services",
     images: [
       {
         url: '/og-image.jpg',
         width: 1200,
         height: 630,
-        alt: 'Architecture Firm',
+        alt: 'DesignBuild Engineers',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Architecture Firm | Professional Architecture and Civil Engineering Services',
-    description: "Professional Architecture and Civil Engineering Services",
+    title: 'DesignBuild Engineers | Professional Architecture, Construction and Civil Engineering Services',
+    description: "Professional Architecture, Construction and Civil Engineering Services",
     images: ['/og-image.jpg'],
   },
   robots: {
@@ -59,7 +59,7 @@ export const metadata: Metadata = {
     },
   },
   alternates: {
-    canonical: 'https://www.architecturefirm.com',
+    canonical: 'https://www.designbuildengineers.com',
   },
   icons: {
     icon: '/favicon.ico',
@@ -75,7 +75,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >

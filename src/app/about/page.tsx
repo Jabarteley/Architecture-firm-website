@@ -4,11 +4,11 @@ import TeamSection from '@/components/About/TeamSection';
 
 export const metadata: Metadata = {
   title: 'About Us',
-  description: 'Learn about our architecture firm\'s mission, vision, and values. Discover our team of expert architects and engineers dedicated to creating innovative design solutions.',
-  keywords: ['about architecture firm', 'our team', 'mission', 'vision', 'values', 'architects', 'engineers'],
+  description: 'Learn about our architecture, construction and civil engineering firm\'s mission, vision, and values. Discover our team of expert architects, engineers and construction professionals dedicated to designing, creating and building innovative solutions.',
+  keywords: ['about architecture firm', 'about construction firm', 'about civil engineering firm', 'our team', 'mission', 'vision', 'values', 'architects', 'engineers', 'construction professionals'],
   openGraph: {
     title: 'About Us | Architecture Firm',
-    description: 'Learn about our architecture firm\'s mission, vision, and values. Discover our team of expert architects and engineers dedicated to creating innovative design solutions.',
+    description: 'Learn about our architecture, construction and civil engineering firm\'s mission, vision, and values. Discover our team of expert architects, engineers and construction professionals dedicated to designing, creating and building innovative solutions.',
     type: 'website',
     images: [
       {
@@ -22,7 +22,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'About Us | Architecture Firm',
-    description: 'Learn about our architecture firm\'s mission, vision, and values. Discover our team of expert architects and engineers dedicated to creating innovative design solutions.',
+    description: 'Learn about our architecture, construction and civil engineering firm\'s mission, vision, and values. Discover our team of expert architects, engineers and construction professionals dedicated to designing, creating and building innovative solutions.',
     images: ['/og-image-about.jpg'],
   },
   alternates: {
@@ -43,7 +43,7 @@ export default async function AboutPage() {
               About Our Firm
             </h1>
             <p className="mt-6 max-w-2xl mx-auto text-xl text-primary-dark-brown">
-              Creating architectural excellence with innovation, sustainability, and timeless design.
+              Designing, creating and building architectural excellence with innovation, sustainability, and timeless design.
             </p>
           </div>
         </div>
@@ -67,7 +67,7 @@ export default async function AboutPage() {
               <div className="bg-primary-light-brown p-8 rounded-lg shadow-sm slide-up">
                 <h3 className="text-2xl font-bold text-primary-dark-brown">Our Mission</h3>
                 <p className="mt-4 text-primary-deep-brown">
-                  To create innovative architectural solutions that enhance human experiences,
+                  To design, create and build innovative architectural, construction and civil engineering solutions that enhance human experiences,
                   respect the environment, and contribute to sustainable communities. We strive
                   to exceed client expectations through creative design, technical excellence,
                   and collaborative partnerships.
@@ -77,9 +77,9 @@ export default async function AboutPage() {
               <div className="bg-primary-light-brown p-8 rounded-lg shadow-sm slide-up" style={{ animationDelay: '0.1s' }}>
                 <h3 className="text-2xl font-bold text-primary-dark-brown">Our Vision</h3>
                 <p className="mt-4 text-primary-deep-brown">
-                  To be recognized as a leader in sustainable architecture, setting new standards
+                  To be recognized as a leader in sustainable architecture, construction and civil engineering, setting new standards
                   for design excellence and environmental responsibility. We envision a world where
-                  thoughtful design creates spaces that inspire, connect, and endure for generations.
+                  thoughtful design, construction and engineering creates spaces that inspire, connect, and endure for generations.
                 </p>
               </div>
             </div>
@@ -96,7 +96,7 @@ export default async function AboutPage() {
               Meet Our Experts
             </p>
             <p className="mt-4 max-w-2xl text-xl text-gray-600 mx-auto">
-              Our talented architects and engineers bring creativity and expertise to every project.
+              Our talented architects, engineers and construction professionals bring creativity and expertise to every project.
             </p>
           </div>
 
