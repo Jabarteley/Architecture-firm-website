@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useRef } from 'react';
+import { supabase } from '@/lib/supabase';
 
 interface MediaLibraryProps {
   onImageSelect: (url: string) => void;
@@ -45,11 +46,16 @@ export default function MediaLibrary({ onImageSelect, onClose }: MediaLibraryPro
 
       const base64File = await toBase64(file);
 
+      // Get the session token for authentication
+      const { data: { session } } = await supabase.auth.getSession();
+      const token = session?.access_token;
+
       // Upload via the API route
       const response = await fetch('/api/admin/upload', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`,
         },
         body: JSON.stringify({
           file: base64File,

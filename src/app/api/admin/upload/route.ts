@@ -1,46 +1,50 @@
 import { NextRequest } from 'next/server';
 import { uploadImage } from '@/lib/cloudinary';
-import { createClient } from '@/lib/supabase-server';
+import { createClient } from '@supabase/supabase-js';
+
+// Get Supabase credentials from environment variables
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
+const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!;
 
 export async function POST(req: NextRequest) {
   try {
-    // Verify admin authentication
-    const supabase = createClient();
-    const {
-      data: { session },
-    } = await supabase.auth.getSession();
+    // Extract the authorization header to verify the session
+    const authHeader = req.headers.get('authorization');
+    if (!authHeader || !authHeader.startsWith('Bearer ')) {
+      return new Response(
+        JSON.stringify({ message: 'Missing or invalid authorization header' }),
+        { status: 401, headers: { 'Content-Type': 'application/json' } }
+      );
+    }
 
-    if (!session) {
+    const token = authHeader.substring(7); // Remove 'Bearer ' prefix
+
+    // Create a Supabase client with anon key for this request
+    const supabase = createClient(supabaseUrl, supabaseAnonKey);
+
+    // Verify the session using the token
+    const { data: { user }, error: userError } = await supabase.auth.getUser(token);
+
+    if (userError || !user) {
       return new Response(
         JSON.stringify({ message: 'Unauthorized' }),
         { status: 401, headers: { 'Content-Type': 'application/json' } }
       );
     }
 
-    // Check if user is admin
-    const { data: { user } } = await supabase.auth.getUser();
-    if (!user) {
+    // Check if user is admin by querying the users table
+    const { data: userData, error: roleError } = await supabase
+      .from('users')
+      .select('role')
+      .eq('id', user.id)
+      .single();
+
+    if (roleError || !userData || userData.role !== 'admin') {
       return new Response(
-        JSON.stringify({ message: 'Unauthorized' }),
-        { status: 401, headers: { 'Content-Type': 'application/json' } }
+        JSON.stringify({ message: 'Unauthorized: Admin access required' }),
+        { status: 403, headers: { 'Content-Type': 'application/json' } }
       );
     }
-
-    // In a real app, you would check the user's role in the database
-    // For now, we'll assume any authenticated user is an admin
-    // You would typically do something like:
-    // const { data: userData, error } = await supabase
-    //   .from('users')
-    //   .select('role')
-    //   .eq('id', user.id)
-    //   .single();
-    //
-    // if (error || userData?.role !== 'admin') {
-    //   return new Response(
-    //     JSON.stringify({ message: 'Unauthorized' }),
-    //     { status: 401, headers: { 'Content-Type': 'application/json' } }
-    //   );
-    // }
 
     const { file, folder, recordType, recordId } = await req.json();
 
