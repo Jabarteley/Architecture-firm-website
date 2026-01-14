@@ -15,6 +15,7 @@ export async function createOrUpdateServiceAction(serviceData: Partial<Omit<Serv
     revalidatePath('/services'); // Revalidate the public services list page
     revalidatePath(`/services/${result.id}`); // Revalidate the specific public service page
     revalidatePath('/admin/services'); // Revalidate the admin services page as well
+    revalidatePath('/'); // Revalidate the homepage to update services overview
 
     return { success: true, service: result };
   } catch (error) {
@@ -29,6 +30,7 @@ export async function deleteServiceAction(serviceId: string) {
         revalidatePath('/services'); // Revalidate the public services list page
         revalidatePath(`/services/${serviceId}`); // Revalidate the specific public service page that was deleted
         revalidatePath('/admin/services'); // Revalidate the admin services page as well
+        revalidatePath('/'); // Revalidate the homepage to update services overview
         return { success: true };
     } catch (error) {
         console.error('Error in deleteService Server Action:', error);

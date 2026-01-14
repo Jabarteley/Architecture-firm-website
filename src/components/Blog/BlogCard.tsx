@@ -22,9 +22,11 @@ export default function BlogCard({ post, className, style }: { post: BlogPost, c
       </div>
       <div className="flex-1 p-6 flex flex-col justify-between">
         <div className="flex-1">
-          <p className="text-sm font-medium text-amber-600">
-            {post.published_at ? new Date(post.published_at).toLocaleDateString() : 'Date not specified'}
-          </p>
+          {post.published_at && (
+            <p className="text-sm font-medium text-amber-600">
+              {new Date(post.published_at).toLocaleDateString()}
+            </p>
+          )}
           <Link href={`/blog/${post.id}`} className="block mt-2">
             <p className="text-xl font-semibold text-stone-900">{post.title}</p>
             <p className="mt-3 text-base text-stone-600">

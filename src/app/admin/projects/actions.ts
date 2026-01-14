@@ -14,6 +14,7 @@ export async function createOrUpdateProjectAction(projectData: Partial<Omit<Proj
 
     revalidatePath('/projects'); // Revalidate the public projects page
     revalidatePath('/admin/projects'); // Revalidate the admin projects page as well
+    revalidatePath('/'); // Revalidate the homepage to update featured projects
 
     return { success: true, project: result };
   } catch (error) {
@@ -27,6 +28,7 @@ export async function deleteProjectAction(projectId: string) {
         await supabaseUtils.deleteProject(projectId);
         revalidatePath('/projects'); // Revalidate the public projects page
         revalidatePath('/admin/projects'); // Revalidate the admin projects page as well
+        revalidatePath('/'); // Revalidate the homepage to update featured projects
         return { success: true };
     } catch (error) {
         console.error('Error in deleteProject Server Action:', error);

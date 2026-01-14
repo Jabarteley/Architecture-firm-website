@@ -38,7 +38,7 @@ export default async function HomePage() {
   // Fetch data from Supabase
   const [services, projects] = await Promise.all([
     supabaseUtils.getServices(),
-    supabaseUtils.getProjects({ category: 'featured', published: true })
+    supabaseUtils.getProjects({ featured: true, published: true })
   ]);
 
   return (

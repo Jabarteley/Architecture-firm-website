@@ -14,6 +14,7 @@ export async function createOrUpdateGalleryItemAction(itemData: Partial<Omit<Gal
 
     revalidatePath('/gallery'); // Revalidate the public gallery page
     revalidatePath('/admin/gallery'); // Revalidate the admin gallery page as well
+    revalidatePath('/'); // Revalidate the homepage to update any gallery references
 
     return { success: true, item: result };
   } catch (error) {
@@ -27,6 +28,7 @@ export async function deleteGalleryItemAction(itemId: string) {
         await supabaseUtils.deleteGalleryItem(itemId);
         revalidatePath('/gallery'); // Revalidate the public gallery page
         revalidatePath('/admin/gallery'); // Revalidate the admin gallery page as well
+        revalidatePath('/'); // Revalidate the homepage to update any gallery references
         return { success: true };
     } catch (error) {
         console.error('Error in deleteGalleryItem Server Action:', error);

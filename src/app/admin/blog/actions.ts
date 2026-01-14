@@ -14,6 +14,7 @@ export async function createOrUpdateBlogPostAction(postData: Partial<Omit<BlogPo
 
     revalidatePath('/blog'); // Revalidate the public blog page
     revalidatePath('/admin/blog'); // Revalidate the admin blog page as well, in case it's cached
+    revalidatePath('/'); // Revalidate the homepage to update any blog references
 
     return { success: true, post: result };
   } catch (error) {
@@ -27,6 +28,7 @@ export async function deleteBlogPostAction(postId: string) {
         await supabaseUtils.deleteBlogPost(postId);
         revalidatePath('/blog'); // Revalidate the public blog page
         revalidatePath('/admin/blog'); // Revalidate the admin blog page as well
+        revalidatePath('/'); // Revalidate the homepage to update any blog references
         return { success: true };
     } catch (error) {
         console.error('Error in deleteBlogPost Server Action:', error);
