@@ -1,6 +1,7 @@
-import { Metadata } from 'next';
+import { Metadata, ResolvingMetadata } from 'next'; // Import ResolvingMetadata
 import { supabaseUtils, Service } from '@/utils/supabase-utils';
 import { notFound } from 'next/navigation';
+import { URL } from 'url'; // Import URL for consistency, though Next.js handles it
 
 interface ServicePageProps {
   params: { id: string };
@@ -9,13 +10,24 @@ interface ServicePageProps {
 // Optional: Generate static params for all services at build time
 export async function generateStaticParams() {
   const services = await supabaseUtils.getServices();
-  return services.map((service) => ({
-    id: service.id,
-  }));
+  // Ensure we only return valid IDs.
+  return services
+    .filter(service => service.id && typeof service.id === 'string' && /^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$/.test(service.id))
+    .map((service) => ({
+      id: service.id,
+    }));
 }
 
-export async function generateMetadata({ params }: ServicePageProps): Promise<Metadata> {
+export async function generateMetadata({ params }: ServicePageProps, parent: ResolvingMetadata): Promise<Metadata> { // Add parent parameter
   const { id } = params;
+
+  // Defensive check for valid UUID format
+  if (!id || typeof id !== 'string' || !/^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$/.test(id)) {
+    return {
+      title: 'Service Not Found',
+      description: 'The requested service could not be found due to an invalid ID.',
+    };
+  }
   const service = await supabaseUtils.getServiceById(id);
 
   if (!service) {
@@ -25,7 +37,11 @@ export async function generateMetadata({ params }: ServicePageProps): Promise<Me
     };
   }
 
+  // Optionally, retrieve parent (root) metadata
+  const previousImages = (await parent).openGraph?.images || [];
+
   return {
+    metadataBase: new URL('https://muhmusty-consult-firm.vercel.app'), // Set the base URL for metadata
     title: service.title,
     description: service.description.substring(0, 160),
     keywords: service.title.split(' ').concat(['service', 'architecture', 'engineering']).join(', '),
@@ -33,7 +49,7 @@ export async function generateMetadata({ params }: ServicePageProps): Promise<Me
       title: service.title,
       description: service.description.substring(0, 160),
       type: 'website',
-      url: `https://your-domain.com/services/${service.id}`, // Replace with your actual domain
+      url: `https://muhmusty-consult-firm.vercel.app/services/${service.id}`, // Use the actual deployed domain
       images: [
         {
           url: service.image_url || '/og-image-services.jpg', // Fallback to a default image
@@ -41,6 +57,7 @@ export async function generateMetadata({ params }: ServicePageProps): Promise<Me
           height: 630,
           alt: service.title,
         },
+        ...previousImages,
       ],
     },
     twitter: {
@@ -54,6 +71,10 @@ export async function generateMetadata({ params }: ServicePageProps): Promise<Me
 
 export default async function ServicePage({ params }: ServicePageProps) {
   const { id } = params;
+  // Defensive check for valid UUID format
+  if (!id || typeof id !== 'string' || !/^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$/.test(id)) {
+    notFound();
+  }
   const service = await supabaseUtils.getServiceById(id);
 
   if (!service) {

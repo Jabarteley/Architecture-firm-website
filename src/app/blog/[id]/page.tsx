@@ -1,6 +1,7 @@
-import { Metadata } from 'next';
+import { Metadata, ResolvingMetadata } from 'next'; // Import ResolvingMetadata
 import { supabaseUtils, BlogPost } from '@/utils/supabase-utils';
 import { notFound } from 'next/navigation';
+import { URL } from 'url'; // Import URL for consistency, though Next.js handles it
 
 interface BlogPostPageProps {
   params: { id: string };
@@ -10,13 +11,24 @@ interface BlogPostPageProps {
 // This helps Next.js pre-render pages for known blog post IDs.
 export async function generateStaticParams() {
   const blogPosts = await supabaseUtils.getBlogPosts(false); // Fetch all posts including drafts
-  return blogPosts.map((post) => ({
-    id: post.id,
-  }));
+  return blogPosts
+    .filter(post => post.id && typeof post.id === 'string' && /^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$/.test(post.id))
+    .map((post) => ({
+      id: post.id,
+    }));
 }
 
-export async function generateMetadata({ params }: BlogPostPageProps): Promise<Metadata> {
+export async function generateMetadata({ params }: BlogPostPageProps, parent: ResolvingMetadata): Promise<Metadata> { // Add parent parameter
   const { id } = params;
+
+  // Defensive check for valid UUID format
+  if (!id || typeof id !== 'string' || !/^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$/.test(id)) {
+    return {
+      title: 'Blog Post Not Found',
+      description: 'The requested blog post could not be found due to an invalid ID.',
+    };
+  }
+
   const post = await supabaseUtils.getBlogPostById(id);
 
   if (!post) {
@@ -26,7 +38,11 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
     };
   }
 
+  // Optionally, retrieve parent (root) metadata
+  const previousImages = (await parent).openGraph?.images || [];
+
   return {
+    metadataBase: new URL('https://muhmusty-consult-firm.vercel.app'), // Set the base URL for metadata
     title: post.title,
     description: post.excerpt || post.content.substring(0, 160),
     keywords: post.title.split(' ').concat(['blog', 'architecture', 'engineering']).join(', '),
@@ -34,7 +50,7 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
       title: post.title,
       description: post.excerpt || post.content.substring(0, 160),
       type: 'article',
-      url: `https://your-domain.com/blog/${post.id}`, // Replace with your actual domain
+      url: `https://muhmusty-consult-firm.vercel.app/blog/${post.id}`, // Use the actual deployed domain
       images: [
         {
           url: post.featured_image || '/og-image-blog.jpg', // Fallback to a default image
@@ -42,6 +58,7 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
           height: 630,
           alt: post.title,
         },
+        ...previousImages,
       ],
     },
     twitter: {
@@ -56,6 +73,10 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
 
 export default async function BlogPostPage({ params }: BlogPostPageProps) {
   const { id } = params;
+  // Defensive check for valid UUID format
+  if (!id || typeof id !== 'string' || !/^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$/.test(id)) {
+    notFound();
+  }
   const post = await supabaseUtils.getBlogPostById(id);
 
   if (!post || !post.published) { // Only show published posts
