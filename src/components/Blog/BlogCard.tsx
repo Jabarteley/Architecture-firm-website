@@ -2,9 +2,9 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { BlogPost } from '@/utils/supabase-utils';
 
-export default function BlogCard({ post }: { post: BlogPost }) {
+export default function BlogCard({ post, className, style }: { post: BlogPost, className?: string, style?: React.CSSProperties }) {
   return (
-    <div className="flex flex-col rounded-lg shadow-lg overflow-hidden bg-white hover:shadow-xl transition-shadow duration-300">
+    <div className={`flex flex-col rounded-lg shadow-lg overflow-hidden bg-white hover:shadow-xl transition-shadow duration-300 ${className}`} style={style}>
       <div className="flex-shrink-0">
         {post.featured_image ? (
           <Image

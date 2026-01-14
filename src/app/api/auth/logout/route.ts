@@ -11,7 +11,7 @@ export async function GET(request: Request) {
   await supabase.auth.signOut();
 
   // Clear cookies
-  const cookieStore = cookies();
+  const cookieStore = await cookies();
   cookieStore.delete('sb-access-token');
   cookieStore.delete('sb-refresh-token');
 
