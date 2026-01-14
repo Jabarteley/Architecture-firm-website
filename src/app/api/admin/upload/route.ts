@@ -5,6 +5,7 @@ import { createClient } from '@supabase/supabase-js';
 // Get Supabase credentials from environment variables
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
 const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!;
+const supabaseServiceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY!;
 
 export async function POST(req: NextRequest) {
   try {
@@ -19,7 +20,7 @@ export async function POST(req: NextRequest) {
 
     const token = authHeader.substring(7); // Remove 'Bearer ' prefix
 
-    // Create a Supabase client with anon key for this request
+    // Create a Supabase client with anon key for authentication
     const supabase = createClient(supabaseUrl, supabaseAnonKey);
 
     // Verify the session using the token
@@ -32,8 +33,11 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    // Check if user is admin by querying the users table
-    const { data: userData, error: roleError } = await supabase
+    // Create a Supabase client with service role key for admin verification
+    const supabaseAdmin = createClient(supabaseUrl, supabaseServiceRoleKey);
+
+    // Check if user is admin by querying the users table with service role key
+    const { data: userData, error: roleError } = await supabaseAdmin
       .from('users')
       .select('role')
       .eq('id', user.id)
@@ -66,7 +70,7 @@ export async function POST(req: NextRequest) {
       switch (recordType) {
         case 'project':
           // For projects, we need to get the existing images and add the new one
-          const { data: projectData, error: projectError } = await supabase
+          const { data: projectData, error: projectError } = await supabaseAdmin
             .from('projects')
             .select('images')
             .eq('id', recordId)
@@ -75,24 +79,24 @@ export async function POST(req: NextRequest) {
           if (!projectError && projectData) {
             const newImages = [...(projectData.images || []), uploadResult.secure_url];
             updateData = { images: newImages };
-            await supabase.from('projects').update(updateData).eq('id', recordId);
+            await supabaseAdmin.from('projects').update(updateData).eq('id', recordId);
           }
           break;
         case 'team':
           updateData = { image_url: uploadResult.secure_url };
-          await supabase.from('team_members').update(updateData).eq('id', recordId);
+          await supabaseAdmin.from('team_members').update(updateData).eq('id', recordId);
           break;
         case 'service':
           updateData = { image_url: uploadResult.secure_url };
-          await supabase.from('services').update(updateData).eq('id', recordId);
+          await supabaseAdmin.from('services').update(updateData).eq('id', recordId);
           break;
         case 'gallery':
           updateData = { image_url: uploadResult.secure_url };
-          await supabase.from('gallery_items').update(updateData).eq('id', recordId);
+          await supabaseAdmin.from('gallery_items').update(updateData).eq('id', recordId);
           break;
         case 'blog':
           updateData = { featured_image: uploadResult.secure_url };
-          await supabase.from('blog_posts').update(updateData).eq('id', recordId);
+          await supabaseAdmin.from('blog_posts').update(updateData).eq('id', recordId);
           break;
       }
     }

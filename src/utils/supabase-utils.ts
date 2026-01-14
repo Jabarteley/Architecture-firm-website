@@ -1,4 +1,5 @@
 import { supabase } from '@/lib/supabase';
+import { supabaseAdmin } from '@/lib/supabaseServer';
 
 // Types for our database entities
 export interface TeamMember {
@@ -114,7 +115,11 @@ export const supabaseUtils = {
   },
 
   createTeamMember: async (memberData: Omit<TeamMember, 'id' | 'created_at'>) => {
-    const { data, error } = await supabase
+    if (!supabaseAdmin) {
+      throw new Error('Supabase admin client not initialized. Check your environment variables.');
+    }
+
+    const { data, error } = await supabaseAdmin
       .from('team_members')
       .insert([{ ...memberData, created_at: new Date().toISOString() }])
       .select()
@@ -125,7 +130,11 @@ export const supabaseUtils = {
   },
 
   updateTeamMember: async (id: string, memberData: Partial<Omit<TeamMember, 'id' | 'created_at'>>) => {
-    const { data, error } = await supabase
+    if (!supabaseAdmin) {
+      throw new Error('Supabase admin client not initialized. Check your environment variables.');
+    }
+
+    const { data, error } = await supabaseAdmin
       .from('team_members')
       .update({ ...memberData, updated_at: new Date().toISOString() })
       .eq('id', id)
@@ -137,7 +146,11 @@ export const supabaseUtils = {
   },
 
   deleteTeamMember: async (id: string) => {
-    const { error } = await supabase
+    if (!supabaseAdmin) {
+      throw new Error('Supabase admin client not initialized. Check your environment variables.');
+    }
+
+    const { error } = await supabaseAdmin
       .from('team_members')
       .delete()
       .eq('id', id);
@@ -169,7 +182,11 @@ export const supabaseUtils = {
   },
 
   createService: async (serviceData: Omit<Service, 'id' | 'created_at'>) => {
-    const { data, error } = await supabase
+    if (!supabaseAdmin) {
+      throw new Error('Supabase admin client not initialized. Check your environment variables.');
+    }
+
+    const { data, error } = await supabaseAdmin
       .from('services')
       .insert([{ ...serviceData, created_at: new Date().toISOString() }])
       .select()
@@ -180,7 +197,11 @@ export const supabaseUtils = {
   },
 
   updateService: async (id: string, serviceData: Partial<Omit<Service, 'id' | 'created_at'>>) => {
-    const { data, error } = await supabase
+    if (!supabaseAdmin) {
+      throw new Error('Supabase admin client not initialized. Check your environment variables.');
+    }
+
+    const { data, error } = await supabaseAdmin
       .from('services')
       .update({ ...serviceData, updated_at: new Date().toISOString() })
       .eq('id', id)
@@ -192,7 +213,11 @@ export const supabaseUtils = {
   },
 
   deleteService: async (id: string) => {
-    const { error } = await supabase
+    if (!supabaseAdmin) {
+      throw new Error('Supabase admin client not initialized. Check your environment variables.');
+    }
+
+    const { error } = await supabaseAdmin
       .from('services')
       .delete()
       .eq('id', id);
@@ -250,7 +275,11 @@ export const supabaseUtils = {
   },
 
   createProject: async (projectData: Omit<Project, 'id' | 'created_at'>) => {
-    const { data, error } = await supabase
+    if (!supabaseAdmin) {
+      throw new Error('Supabase admin client not initialized. Check your environment variables.');
+    }
+
+    const { data, error } = await supabaseAdmin
       .from('projects')
       .insert([{ ...projectData, created_at: new Date().toISOString() }])
       .select()
@@ -261,7 +290,11 @@ export const supabaseUtils = {
   },
 
   updateProject: async (id: string, projectData: Partial<Omit<Project, 'id' | 'created_at'>>) => {
-    const { data, error } = await supabase
+    if (!supabaseAdmin) {
+      throw new Error('Supabase admin client not initialized. Check your environment variables.');
+    }
+
+    const { data, error } = await supabaseAdmin
       .from('projects')
       .update({ ...projectData, updated_at: new Date().toISOString() })
       .eq('id', id)
@@ -273,7 +306,11 @@ export const supabaseUtils = {
   },
 
   deleteProject: async (id: string) => {
-    const { error } = await supabase
+    if (!supabaseAdmin) {
+      throw new Error('Supabase admin client not initialized. Check your environment variables.');
+    }
+
+    const { error } = await supabaseAdmin
       .from('projects')
       .delete()
       .eq('id', id);
@@ -296,7 +333,11 @@ export const supabaseUtils = {
   },
 
   createGalleryItem: async (itemData: Omit<GalleryItem, 'id' | 'created_at'>) => {
-    const { data, error } = await supabase
+    if (!supabaseAdmin) {
+      throw new Error('Supabase admin client not initialized. Check your environment variables.');
+    }
+
+    const { data, error } = await supabaseAdmin
       .from('gallery_items')
       .insert([{ ...itemData, created_at: new Date().toISOString() }])
       .select()
@@ -307,7 +348,11 @@ export const supabaseUtils = {
   },
 
   updateGalleryItem: async (id: string, itemData: Partial<Omit<GalleryItem, 'id' | 'created_at'>>) => {
-    const { data, error } = await supabase
+    if (!supabaseAdmin) {
+      throw new Error('Supabase admin client not initialized. Check your environment variables.');
+    }
+
+    const { data, error } = await supabaseAdmin
       .from('gallery_items')
       .update({ ...itemData, updated_at: new Date().toISOString() })
       .eq('id', id)
@@ -319,7 +364,11 @@ export const supabaseUtils = {
   },
 
   deleteGalleryItem: async (id: string) => {
-    const { error } = await supabase
+    if (!supabaseAdmin) {
+      throw new Error('Supabase admin client not initialized. Check your environment variables.');
+    }
+
+    const { error } = await supabaseAdmin
       .from('gallery_items')
       .delete()
       .eq('id', id);
@@ -353,7 +402,11 @@ export const supabaseUtils = {
   },
 
   createBlogPost: async (postData: Omit<BlogPost, 'id' | 'created_at' | 'updated_at'>) => {
-    const { data, error } = await supabase
+    if (!supabaseAdmin) {
+      throw new Error('Supabase admin client not initialized. Check your environment variables.');
+    }
+
+    const { data, error } = await supabaseAdmin
       .from('blog_posts')
       .insert([{
         ...postData,
@@ -368,7 +421,11 @@ export const supabaseUtils = {
   },
 
   updateBlogPost: async (id: string, postData: Partial<Omit<BlogPost, 'id' | 'created_at' | 'updated_at'>>) => {
-    const { data, error } = await supabase
+    if (!supabaseAdmin) {
+      throw new Error('Supabase admin client not initialized. Check your environment variables.');
+    }
+
+    const { data, error } = await supabaseAdmin
       .from('blog_posts')
       .update({
         ...postData,
@@ -383,7 +440,11 @@ export const supabaseUtils = {
   },
 
   deleteBlogPost: async (id: string) => {
-    const { error } = await supabase
+    if (!supabaseAdmin) {
+      throw new Error('Supabase admin client not initialized. Check your environment variables.');
+    }
+
+    const { error } = await supabaseAdmin
       .from('blog_posts')
       .delete()
       .eq('id', id);
@@ -403,7 +464,11 @@ export const supabaseUtils = {
   },
 
   updateSiteSettings: async (settingsData: Partial<Omit<SiteSettings, 'id' | 'created_at' | 'updated_at'>>) => {
-    const { data, error } = await supabase
+    if (!supabaseAdmin) {
+      throw new Error('Supabase admin client not initialized. Check your environment variables.');
+    }
+
+    const { data, error } = await supabaseAdmin
       .from('site_settings')
       .update({
         ...settingsData,
@@ -443,7 +508,11 @@ export const supabaseUtils = {
   },
 
   deleteContactSubmission: async (id: string) => {
-    const { error } = await supabase
+    if (!supabaseAdmin) {
+      throw new Error('Supabase admin client not initialized. Check your environment variables.');
+    }
+
+    const { error } = await supabaseAdmin
       .from('contact_submissions')
       .delete()
       .eq('id', id);
@@ -474,7 +543,11 @@ export const supabaseUtils = {
   },
 
   createUser: async (userData: Omit<User, 'id' | 'created_at' | 'updated_at'>) => {
-    const { data, error } = await supabase
+    if (!supabaseAdmin) {
+      throw new Error('Supabase admin client not initialized. Check your environment variables.');
+    }
+
+    const { data, error } = await supabaseAdmin
       .from('users')
       .insert([{
         ...userData,
@@ -489,7 +562,11 @@ export const supabaseUtils = {
   },
 
   updateUser: async (id: string, userData: Partial<Omit<User, 'id' | 'created_at' | 'updated_at'>>) => {
-    const { data, error } = await supabase
+    if (!supabaseAdmin) {
+      throw new Error('Supabase admin client not initialized. Check your environment variables.');
+    }
+
+    const { data, error } = await supabaseAdmin
       .from('users')
       .update({
         ...userData,
@@ -504,7 +581,11 @@ export const supabaseUtils = {
   },
 
   deleteUser: async (id: string) => {
-    const { error } = await supabase
+    if (!supabaseAdmin) {
+      throw new Error('Supabase admin client not initialized. Check your environment variables.');
+    }
+
+    const { error } = await supabaseAdmin
       .from('users')
       .delete()
       .eq('id', id);
