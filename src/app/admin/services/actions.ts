@@ -12,7 +12,8 @@ export async function createOrUpdateServiceAction(serviceData: Partial<Omit<Serv
       result = await supabaseUtils.createService(serviceData as Omit<Service, 'id' | 'created_at' | 'updated_at'>);
     }
 
-    revalidatePath('/services'); // Revalidate the public services page
+    revalidatePath('/services'); // Revalidate the public services list page
+    revalidatePath(`/services/${result.id}`); // Revalidate the specific public service page
     revalidatePath('/admin/services'); // Revalidate the admin services page as well
 
     return { success: true, service: result };
@@ -25,7 +26,8 @@ export async function createOrUpdateServiceAction(serviceData: Partial<Omit<Serv
 export async function deleteServiceAction(serviceId: string) {
     try {
         await supabaseUtils.deleteService(serviceId);
-        revalidatePath('/services'); // Revalidate the public services page
+        revalidatePath('/services'); // Revalidate the public services list page
+        revalidatePath(`/services/${serviceId}`); // Revalidate the specific public service page that was deleted
         revalidatePath('/admin/services'); // Revalidate the admin services page as well
         return { success: true };
     } catch (error) {
