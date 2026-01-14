@@ -31,7 +31,7 @@ export const metadata: Metadata = {
 };
 
 export default async function BlogPage() {
-  const blogPosts = await supabaseUtils.getBlogPosts();
+  const blogPosts = await supabaseUtils.getBlogPosts(true);
 
   return (
     <div className="min-h-screen bg-primary-very-light-brown">

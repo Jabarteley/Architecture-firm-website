@@ -31,7 +31,7 @@ export const metadata: Metadata = {
 };
 
 export default async function ProjectsPage() {
-  const projects = await supabaseUtils.getProjects();
+  const projects = await supabaseUtils.getProjects({ published: true });
 
   return (
     <div className="min-h-screen bg-primary-very-light-brown">

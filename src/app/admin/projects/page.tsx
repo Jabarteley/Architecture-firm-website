@@ -19,7 +19,7 @@ export default function ProjectsPage() {
   const loadProjects = async () => {
     try {
       setLoading(true);
-      const data = await supabaseUtils.getProjects();
+      const data = await supabaseUtils.getProjects({ published: undefined });
       setProjects(data);
     } catch (err) {
       setError('Failed to load projects');

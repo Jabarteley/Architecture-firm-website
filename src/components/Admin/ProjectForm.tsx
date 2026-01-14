@@ -22,7 +22,7 @@ export default function ProjectForm({
     category: project?.category || '',
     images: project?.images || [],
     featured: project?.featured || false,
-    published: project?.published || false,
+    published: project?.published !== undefined ? project.published : true,
   });
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [isSubmitting, setIsSubmitting] = useState(false);

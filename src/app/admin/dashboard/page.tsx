@@ -7,7 +7,7 @@ import RecentActivity from '@/components/Admin/RecentActivity';
 async function DashboardContent() {
   try {
     const [projects, teamMembers, blogPosts, contactSubmissions] = await Promise.all([
-      supabaseUtils.getProjects(),
+      supabaseUtils.getProjects({ published: undefined }),
       supabaseUtils.getTeamMembers(),
       supabaseUtils.getBlogPosts(false), // Get all posts, published and draft
       supabaseUtils.getContactSubmissions(),

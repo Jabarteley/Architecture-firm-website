@@ -201,8 +201,20 @@ export const supabaseUtils = {
   },
 
   // Projects
-  getProjects: async (filters?: { category?: string; location?: string; year?: string; featured?: boolean }) => {
+  getProjects: async (filters?: { category?: string; location?: string; year?: string; featured?: boolean; published?: boolean }) => {
+    // Default to published=true for public facing projects, unless explicitly overridden
+    const publishedFilter = filters?.published !== undefined ? filters.published : true;
+
     let query = supabase.from('projects').select('*').order('completion_date', { ascending: false });
+
+    // Apply published filter: default to true for public, allow override for admin
+    if (filters?.published !== undefined) {
+      // If explicitly set (true or false), use that value
+      query = query.eq('published', filters.published);
+    } else {
+      // Otherwise, default to published=true for public view
+      query = query.eq('published', true);
+    }
 
     if (filters?.category) {
       query = query.eq('category', filters.category);
