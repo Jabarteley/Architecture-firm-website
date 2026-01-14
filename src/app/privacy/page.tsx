@@ -4,7 +4,7 @@ export default function PrivacyPage() {
       <div className="max-w-3xl mx-auto bg-white p-8 rounded-lg shadow-md">
         <h1 className="text-3xl font-bold text-gray-900 mb-6">Privacy Policy</h1>
         <p className="text-gray-700 leading-relaxed mb-4">
-          At DesignBuild Engineers, we are committed to protecting your privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our website.
+          At Mohh-Musty, we are committed to protecting your privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our website.
         </p>
         <h2 className="text-2xl font-semibold text-gray-800 mb-4">Information We Collect</h2>
         <p className="text-gray-700 leading-relaxed mb-4">

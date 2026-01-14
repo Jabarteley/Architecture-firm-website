@@ -8,7 +8,10 @@ const Footer = () => {
       <div className="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div>
-            <h3 className="text-lg font-semibold text-white">DesignBuild Engineers</h3>
+            <div className="flex items-center">
+              <img src="/logo.svg" alt="Mohh-Musty Logo" className="h-8 w-8 mr-2" />
+              <h3 className="text-lg font-semibold text-white">Mohh-Musty</h3>
+            </div>
             <p className="mt-4 text-stone-300 text-sm">
               Designing, creating and building architectural excellence with innovation, sustainability, and timeless design.
             </p>
@@ -67,12 +70,13 @@ const Footer = () => {
 
         <div className="mt-12 border-t border-stone-700 pt-8 flex flex-col md:flex-row justify-between items-center">
           <p className="text-stone-400 text-sm">
-            &copy; {currentYear} DesignBuild Engineers. All rights reserved.
+            &copy; {currentYear} Mohh-Musty. All rights reserved.
           </p>
           <div className="mt-4 md:mt-0">
-            <nav className="flex space-x-6">
+            <nav className="flex flex-wrap justify-center gap-4">
               <Link href="/privacy" className="text-stone-400 hover:text-amber-500 text-sm">Privacy Policy</Link>
               <Link href="/terms" className="text-stone-400 hover:text-amber-500 text-sm">Terms of Service</Link>
+              <Link href="/login" className="text-stone-400 hover:text-amber-500 text-sm">Admin Login</Link>
             </nav>
           </div>
         </div>

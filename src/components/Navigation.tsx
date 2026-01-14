@@ -39,7 +39,8 @@ const Navigation = () => {
         <div className="flex justify-between h-16">
           <div className="flex items-center">
             <Link href="/" className="flex-shrink-0 flex items-center">
-              <span className="text-2xl font-bold text-primary-dark-brown">DesignBuild Engineers</span>
+              <img src="/logo.svg" alt="Mohh-Musty Logo" className="h-10 w-10 mr-2" />
+              <span className="text-2xl font-bold text-primary-dark-brown hidden sm:block">Mohh-Musty</span>
             </Link>
             <nav className="hidden md:ml-10 md:flex md:space-x-8">
               {navLinks.map((link) => (
@@ -76,10 +77,10 @@ const Navigation = () => {
               </div>
             ) : (
               <Link
-                href="/login"
+                href="/admin/login"
                 className="text-gray-700 hover:text-primary-dark-brown text-sm font-medium"
               >
-                Admin Login
+                
               </Link>
             )}
           </div>

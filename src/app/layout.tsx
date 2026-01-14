@@ -17,33 +17,33 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: {
-    template: '%s | DesignBuild Engineers',
-    default: 'DesignBuild Engineers | Professional Architecture, Construction and Civil Engineering Services',
+    template: '%s | Mohh-Musty',
+    default: 'Mohh-Musty | Professional Architecture, Construction and Civil Engineering Services',
   },
   description: "Professional Architecture, Construction and Civil Engineering Services",
   keywords: ['architecture', 'construction', 'civil engineering', 'design', 'building', 'construction services', 'civil engineering projects'],
-  authors: [{ name: 'DesignBuild Engineers' }],
-  creator: 'DesignBuild Engineers',
-  publisher: 'DesignBuild Engineers',
+  authors: [{ name: 'Mohh-Musty' }],
+  creator: 'Mohh-Musty',
+  publisher: 'Mohh-Musty',
   openGraph: {
     type: 'website',
     locale: 'en_US',
     url: 'https://www.designbuildengineers.com',
-    siteName: 'DesignBuild Engineers',
-    title: 'DesignBuild Engineers | Professional Architecture, Construction and Civil Engineering Services',
+    siteName: 'Mohh-Musty',
+    title: 'Mohh-Musty | Professional Architecture, Construction and Civil Engineering Services',
     description: "Professional Architecture, Construction and Civil Engineering Services",
     images: [
       {
         url: '/og-image.jpg',
         width: 1200,
         height: 630,
-        alt: 'DesignBuild Engineers',
+        alt: 'Mohh-Musty',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'DesignBuild Engineers | Professional Architecture, Construction and Civil Engineering Services',
+    title: 'Mohh-Musty | Professional Architecture, Construction and Civil Engineering Services',
     description: "Professional Architecture, Construction and Civil Engineering Services",
     images: ['/og-image.jpg'],
   },

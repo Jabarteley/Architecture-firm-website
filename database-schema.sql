@@ -129,7 +129,7 @@ CREATE TABLE IF NOT EXISTS pages (
 
 -- Insert default site settings
 INSERT INTO site_settings (site_title, site_description)
-VALUES ('DesignBuild Engineers', 'Professional Architecture, Construction and Civil Engineering Services')
+VALUES ('Mohh-Musty', 'Professional Architecture, Construction and Civil Engineering Services')
 ON CONFLICT DO NOTHING;
 
 -- Insert default admin user (password should be securely hashed in production)

@@ -11,7 +11,7 @@ export const metadata: Metadata = {
   description: 'Professional Architecture, Construction and Civil Engineering Services. We design, create and build innovative architectural solutions that blend aesthetics with functionality, creating spaces that inspire and endure.',
   keywords: ['architecture', 'construction', 'civil engineering', 'design', 'building', 'architectural firm', 'construction services', 'civil engineering projects'],
   openGraph: {
-    title: 'Architecture Firm | Professional Architecture, Construction and Civil Engineering Services',
+    title: 'Mohh-Musty | Professional Architecture, Construction and Civil Engineering Services',
     description: 'Professional Architecture, Construction and Civil Engineering Services. We design, create and build innovative architectural solutions that blend aesthetics with functionality, creating spaces that inspire and endure.',
     type: 'website',
     images: [
@@ -19,13 +19,13 @@ export const metadata: Metadata = {
         url: 'https://medium.com/@matt-sharon/architecture-explained-phases-of-designing-building-a-project-e6d8a2a72945',
         width: 1200,
         height: 630,
-        alt: 'Architecture Firm Home',
+        alt: 'Mohh-Musty Home',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Architecture Firm | Professional Architecture, Construction and Civil Engineering Services',
+    title: 'Mohh-Musty | Professional Architecture, Construction and Civil Engineering Services',
     description: 'Professional Architecture, Construction and Civil Engineering Services. We design, create and build innovative architectural solutions that blend aesthetics with functionality, creating spaces that inspire and endure.',
     images: ['/og-image-home.jpg'],
   },

@@ -4,7 +4,7 @@ export default function TermsPage() {
       <div className="max-w-3xl mx-auto bg-white p-8 rounded-lg shadow-md">
         <h1 className="text-3xl font-bold text-gray-900 mb-6">Terms of Service</h1>
         <p className="text-gray-700 leading-relaxed mb-4">
-          Welcome to DesignBuild Engineers. These Terms of Service govern your use of our website and services. By accessing or using our website, you agree to comply with and be bound by these terms.
+          Welcome to Mohh-Musty. These Terms of Service govern your use of our website and services. By accessing or using our website, you agree to comply with and be bound by these terms.
         </p>
         <h2 className="text-2xl font-semibold text-gray-800 mb-4">Acceptance of Terms</h2>
         <p className="text-gray-700 leading-relaxed mb-4">
@@ -16,7 +16,7 @@ export default function TermsPage() {
         </p>
         <h2 className="text-2xl font-semibold text-gray-800 mb-4">Intellectual Property</h2>
         <p className="text-gray-700 leading-relaxed mb-4">
-          All content on this website, including text, graphics, logos, images, and software, is the property of DesignBuild Engineers or its content suppliers and is protected by intellectual property laws.
+          All content on this website, including text, graphics, logos, images, and software, is the property of Mohh-Musty or its content suppliers and is protected by intellectual property laws.
         </p>
         <h2 className="text-2xl font-semibold text-gray-800 mb-4">Disclaimer of Warranties</h2>
         <p className="text-gray-700 leading-relaxed mb-4">
