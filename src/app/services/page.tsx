@@ -66,14 +66,14 @@ export default async function ServicesPage() {
       </div>
 
       {/* Service Philosophy */}
-      <div className="py-16 bg-primary-light-brown">
+      <div className="py-16 bg-text-primary-deep-brown">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="lg:grid lg:grid-cols-2 lg:gap-16 lg:items-center">
             <div className="fade-in">
-              <h2 className="text-3xl font-extrabold text-primary-deep-brown sm:text-4xl">
+              <h2 className="text-3xl font-extrabold text-primary-very-light-brown sm:text-4xl">
                 Our Approach
               </h2>
-              <p className="mt-4 text-primary-dark-brown text-lg">
+              <p className="mt-4 text-primary-very-light-brown text-lg">
                 We believe in creating spaces that are not only aesthetically pleasing but also functional, sustainable, and responsive to the needs of the people who inhabit them. Our integrated approach combines innovative design with technical expertise to deliver exceptional results.
               </p>
               <dl className="mt-10 space-y-6">
@@ -86,8 +86,8 @@ export default async function ServicesPage() {
                     </div>
                   </div>
                   <div className="ml-4">
-                    <dt className="text-lg font-medium text-primary-deep-brown">Quality Assurance</dt>
-                    <dd className="mt-2 text-primary-dark-brown">
+                    <dt className="text-lg font-medium text-primary-very-light-brown">Quality Assurance</dt>
+                    <dd className="mt-2 text-primary-very-light-brown">
                       We maintain the highest standards throughout the design and construction process.
                     </dd>
                   </div>
@@ -102,8 +102,8 @@ export default async function ServicesPage() {
                     </div>
                   </div>
                   <div className="ml-4">
-                    <dt className="text-lg font-medium text-primary-deep-brown">Innovation</dt>
-                    <dd className="mt-2 text-primary-dark-brown">
+                    <dt className="text-lg font-medium text-primary-very-light-brown">Innovation</dt>
+                    <dd className="mt-2 text-primary-very-light-brown">
                       We leverage cutting-edge technology and design methodologies to create unique solutions.
                     </dd>
                   </div>
@@ -118,8 +118,8 @@ export default async function ServicesPage() {
                     </div>
                   </div>
                   <div className="ml-4">
-                    <dt className="text-lg font-medium text-primary-deep-brown">Collaboration</dt>
-                    <dd className="mt-2 text-primary-dark-brown">
+                    <dt className="text-lg font-medium text-primary-very-light-brown">Collaboration</dt>
+                    <dd className="mt-2 text-primary-very-light-brown">
                       We work closely with clients, contractors, and stakeholders to ensure project success.
                     </dd>
                   </div>

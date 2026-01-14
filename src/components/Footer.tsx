@@ -35,7 +35,7 @@ const Footer = () => {
           </div>
 
           <div>
-            <h3 className="text-sm font-semibold text-amber-500 tracking-wider uppercase">Solutions</h3>
+            <h3 className="text-sm font-semibold text-primary-deep-brown tracking-wider uppercase">Solutions</h3>
             <ul className="mt-4 space-y-4">
               <li><a href="/services#residential" className="text-stone-300 hover:text-white text-sm">Residential Architecture</a></li>
               <li><a href="/services#commercial" className="text-stone-300 hover:text-white text-sm">Commercial Design</a></li>
@@ -45,7 +45,7 @@ const Footer = () => {
           </div>
 
           <div>
-            <h3 className="text-sm font-semibold text-amber-500 tracking-wider uppercase">Company</h3>
+            <h3 className="text-sm font-semibold text-primary-deep-brown tracking-wider uppercase">Company</h3>
             <ul className="mt-4 space-y-4">
               <li><Link href="/about" className="text-stone-300 hover:text-white text-sm">About Us</Link></li>
               <li><Link href="/projects" className="text-stone-300 hover:text-white text-sm">Projects</Link></li>
@@ -55,7 +55,7 @@ const Footer = () => {
           </div>
 
           <div>
-            <h3 className="text-sm font-semibold text-amber-500 tracking-wider uppercase">Contact</h3>
+            <h3 className="text-sm font-semibold text-primary-deep-brown tracking-wider uppercase">Contact</h3>
             <ul className="mt-4 space-y-4">
               <li className="text-stone-300 text-sm">123 Architecture Ave</li>
               <li className="text-stone-300 text-sm">Design District, NY 10001</li>

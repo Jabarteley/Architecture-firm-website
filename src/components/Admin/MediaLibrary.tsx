@@ -1,7 +1,6 @@
 'use client';
 
-import { useState, useRef, useEffect } from 'react';
-import { uploadImage } from '@/lib/cloudinary';
+import { useState, useRef } from 'react';
 
 interface MediaLibraryProps {
   onImageSelect: (url: string) => void;
@@ -23,10 +22,19 @@ export default function MediaLibrary({ onImageSelect, onClose }: MediaLibraryPro
     setError(null);
     setUploadProgress(0);
 
+    // Helper function to convert file to Base64
+    const toBase64 = (file: File): Promise<string> =>
+      new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = () => resolve(reader.result as string);
+        reader.onerror = (error) => reject(error);
+      });
+
     try {
       // Simulate upload progress
       const interval = setInterval(() => {
-        setUploadProgress(prev => {
+        setUploadProgress((prev) => {
           if (prev >= 90) {
             clearInterval(interval);
             return prev;
@@ -35,16 +43,33 @@ export default function MediaLibrary({ onImageSelect, onClose }: MediaLibraryPro
         });
       }, 200);
 
-      // Upload to Cloudinary
-      const result = await uploadImage(file, 'architecture-firm/media');
+      const base64File = await toBase64(file);
+
+      // Upload via the API route
+      const response = await fetch('/api/admin/upload', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          file: base64File,
+          folder: 'architecture-firm/media',
+        }),
+      });
+
+      const result = await response.json();
       clearInterval(interval);
       setUploadProgress(100);
 
-      setSelectedImage(result.secure_url);
-      onImageSelect(result.secure_url);
+      if (!response.ok) {
+        throw new Error(result.message || 'Failed to upload image.');
+      }
+
+      setSelectedImage(result.url);
+      onImageSelect(result.url);
     } catch (err) {
       console.error('Error uploading image:', err);
-      setError('Failed to upload image. Please try again.');
+      setError(err instanceof Error ? err.message : 'Failed to upload image. Please try again.');
     } finally {
       setUploading(false);
     }

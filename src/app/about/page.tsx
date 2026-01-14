@@ -138,11 +138,11 @@ export default async function AboutPage() {
       </div>
 
       {/* Values Section */}
-      <div className="py-16 bg-primary-light-brown">
+      <div className="py-16 bg-primary-very-light-brown">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center fade-in">
-            <h2 className="text-base font-semibold text-primary-dark-brown tracking-wide uppercase">Core Values</h2>
-            <p className="mt-2 text-3xl font-extrabold text-primary-deep-brown sm:text-4xl">
+            <h2 className="text-base font-semibold text-primary-very-light-brown tracking-wide uppercase">Core Values</h2>
+            <p className="mt-2 text-3xl font-extrabold text-primary-very-light-brown sm:text-4xl">
               What Drives Us
             </p>
           </div>

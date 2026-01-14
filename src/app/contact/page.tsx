@@ -2,10 +2,11 @@ import { createClient } from '@/lib/supabase-server';
 import { redirect } from 'next/navigation';
 
 export default async function ContactPage({ searchParams }: { searchParams: { success?: string } }) {
-  const supabase = createClient();
 
   const handleSubmit = async (formData: FormData) => {
     'use server';
+
+    const supabase = createClient();
     
     const name = formData.get('name') as string;
     const email = formData.get('email') as string;

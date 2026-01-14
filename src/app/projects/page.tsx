@@ -95,7 +95,7 @@ export default async function ProjectsPage() {
       </div>
 
       {/* Stats Section */}
-      <div className="bg-primary-dark-brown">
+      <div className="bg-text-primary-deep-brown">
         <div className="max-w-7xl mx-auto py-12 px-4 sm:py-16 sm:px-6 lg:px-8 lg:py-20">
           <div className="max-w-4xl mx-auto text-center">
             <h2 className="text-3xl font-extrabold text-white sm:text-4xl">
