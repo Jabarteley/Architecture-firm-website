@@ -87,7 +87,7 @@ export default async function ContactPage({ searchParams }: { searchParams: { su
                   </div>
                   <div className="ml-4">
                     <h3 className="text-lg font-medium text-primary-deep-brown">Phone</h3>
-                    <p className="mt-1 text-primary-dark-brown">+1 (555) 123-4567</p>
+                    <p className="mt-1 text-primary-dark-brown">+234 806 165 991</p>
                   </div>
                 </div>
 
@@ -101,7 +101,7 @@ export default async function ContactPage({ searchParams }: { searchParams: { su
                   </div>
                   <div className="ml-4">
                     <h3 className="text-lg font-medium text-primary-deep-brown">Email</h3>
-                    <p className="mt-1 text-primary-dark-brown">info@architecturefirm.com</p>
+                    <p className="mt-1 text-primary-dark-brown">mukaram907@gmail.com</p>
                   </div>
                 </div>
 
@@ -117,8 +117,9 @@ export default async function ContactPage({ searchParams }: { searchParams: { su
                   <div className="ml-4">
                     <h3 className="text-lg font-medium text-primary-deep-brown">Office</h3>
                     <p className="mt-1 text-primary-dark-brown">
-                      123 Architecture Ave<br />
-                      Design District, NY 10001
+                      No 30 Avenue 5 Equity Estate<br />
+                      Behind Ilorin West Local Government Secretariat Warah Road<br />
+                      Ilorin, Kwara State
                     </p>
                   </div>
                 </div>

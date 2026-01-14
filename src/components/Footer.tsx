@@ -60,10 +60,11 @@ const Footer = () => {
           <div>
             <h3 className="text-sm font-semibold text-primary-deep-brown tracking-wider uppercase">Contact</h3>
             <ul className="mt-4 space-y-4">
-              <li className="text-stone-300 text-sm">123 Architecture Ave</li>
-              <li className="text-stone-300 text-sm">Design District, NY 10001</li>
-              <li className="text-stone-300 text-sm">+1 (555) 123-4567</li>
-              <li className="text-stone-300 text-sm">info@architecturefirm.com</li>
+              <li className="text-stone-300 text-sm">No 30 Avenue 5 Equity Estate</li>
+              <li className="text-stone-300 text-sm">Behind Ilorin West Local Government Secretariat Warah Road</li>
+              <li className="text-stone-300 text-sm">Ilorin, Kwara State</li>
+              <li className="text-stone-300 text-sm">+234 806 165 991</li>
+              <li className="text-stone-300 text-sm">mukaram907@gmail.com</li>
             </ul>
           </div>
         </div>

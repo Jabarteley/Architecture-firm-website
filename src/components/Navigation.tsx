@@ -60,7 +60,7 @@ const Navigation = () => {
           </div>
 
           <div className="hidden md:flex items-center">
-            {isAdmin ? (
+            {isAdmin && (
               <div className="flex items-center space-x-4">
                 <Link
                   href="/admin/dashboard"
@@ -75,13 +75,6 @@ const Navigation = () => {
                   Sign out
                 </button>
               </div>
-            ) : (
-              <Link
-                href="/admin/login"
-                className="text-gray-700 hover:text-primary-dark-brown text-sm font-medium"
-              >
-                
-              </Link>
             )}
           </div>
 
@@ -124,7 +117,7 @@ const Navigation = () => {
             ))}
 
             <div className="pt-4 pb-3 border-t border-stone-200">
-              {isAdmin ? (
+              {isAdmin && (
                 <div className="flex flex-col space-y-2 px-4">
                   <Link
                     href="/admin/dashboard"
@@ -139,13 +132,6 @@ const Navigation = () => {
                     Sign out
                   </button>
                 </div>
-              ) : (
-                <Link
-                  href="/login"
-                  className="block px-4 py-2 text-base font-medium text-gray-700 hover:text-primary-dark-brown hover:bg-stone-50"
-                >
-                  Admin Login
-                </Link>
               )}
             </div>
           </div>
