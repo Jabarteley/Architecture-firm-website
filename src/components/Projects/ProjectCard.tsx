@@ -2,9 +2,9 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { Project } from '@/utils/supabase-utils';
 
-export default function ProjectCard({ project }: { project: Project }) {
+export default function ProjectCard({ project, className, style }: { project: Project, className?: string, style?: React.CSSProperties }) {
   return (
-    <div className="group flex flex-col rounded-lg shadow-lg overflow-hidden bg-white hover:shadow-xl transition-shadow duration-300">
+    <div className={`group flex flex-col rounded-lg shadow-lg overflow-hidden bg-white hover:shadow-xl transition-shadow duration-300 ${className}`} style={style}>
       <div className="flex-shrink-0 relative">
         {project.images && project.images.length > 0 ? (
           <Image

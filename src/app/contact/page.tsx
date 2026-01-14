@@ -1,10 +1,9 @@
 import { createClient } from '@/lib/supabase-server';
 import { redirect } from 'next/navigation';
-import React from 'react';
 
 export const dynamic = 'force-dynamic';
 
-export default function ContactPage({ searchParams }: { searchParams: { success?: string } }) {
+export default async function ContactPage({ searchParams }: { searchParams: { success?: string } }) {
 
   const handleSubmit = async (formData: FormData) => {
     'use server';
@@ -50,8 +49,7 @@ export default function ContactPage({ searchParams }: { searchParams: { success?
   };
 
   // Check for success query param
-  const resolvedSearchParams = React.use(searchParams);
-  const success = resolvedSearchParams.success === 'true';
+  const success = searchParams.success === 'true';
 
   return (
     <div className="min-h-screen bg-primary-very-light-brown">
