@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { supabaseUtils, Project } from '@/utils/supabase-utils';
 import ProtectedRoute from '@/components/ProtectedRoute';
 import ProjectForm from '@/components/Admin/ProjectForm';
+import { createOrUpdateProjectAction, deleteProjectAction } from './actions'; // Import the new server actions
 
 export default function ProjectsPage() {
   const [projects, setProjects] = useState<Project[]>([]);
@@ -31,17 +32,18 @@ export default function ProjectsPage() {
 
   const handleSave = async (projectData: Partial<Project>, id?: string) => {
     try {
-      if (id) {
-        // Update existing project
-        const updatedProject = await supabaseUtils.updateProject(id, projectData);
-        setProjects(projects.map(p => p.id === id ? updatedProject : p));
-      } else {
-        // Create new project
-        const newProject = await supabaseUtils.createProject(projectData as Omit<Project, 'id' | 'created_at'>);
-        setProjects([...projects, newProject]);
+      const response = await createOrUpdateProjectAction(projectData, id); // Call the server action
+      if (response.success && response.project) {
+        if (id) {
+          setProjects(projects.map(p => p.id === id ? response.project! : p));
+        } else {
+          setProjects([...projects, response.project]);
+        }
+        setShowForm(false);
+        setEditingProject(null);
+      } else if (response.error) {
+        setError(response.error);
       }
-      setShowForm(false);
-      setEditingProject(null);
     } catch (err) {
       setError('Failed to save project');
       console.error('Error saving project:', err);
@@ -56,8 +58,12 @@ export default function ProjectsPage() {
   const handleDelete = async (id: string) => {
     if (window.confirm('Are you sure you want to delete this project?')) {
       try {
-        await supabaseUtils.deleteProject(id);
-        setProjects(projects.filter(project => project.id !== id));
+        const response = await deleteProjectAction(id); // Call the server action
+        if (response.success) {
+            setProjects(projects.filter(project => project.id !== id));
+        } else if (response.error) {
+            setError(response.error);
+        }
       } catch (err) {
         setError('Failed to delete project');
         console.error('Error deleting project:', err);

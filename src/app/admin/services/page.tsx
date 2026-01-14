@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { supabaseUtils, Service } from '@/utils/supabase-utils';
 import ProtectedRoute from '@/components/ProtectedRoute';
 import ServiceForm from '@/components/Admin/ServiceForm';
+import { createOrUpdateServiceAction, deleteServiceAction } from './actions'; // Import the new server actions
 
 export default function ServicesPage() {
   const [services, setServices] = useState<Service[]>([]);
@@ -31,17 +32,18 @@ export default function ServicesPage() {
 
   const handleSave = async (serviceData: Partial<Service>, id?: string) => {
     try {
-      if (id) {
-        // Update existing service
-        const updatedService = await supabaseUtils.updateService(id, serviceData);
-        setServices(services.map(s => s.id === id ? updatedService : s));
-      } else {
-        // Create new service
-        const newService = await supabaseUtils.createService(serviceData as Omit<Service, 'id' | 'created_at'>);
-        setServices([...services, newService]);
+      const response = await createOrUpdateServiceAction(serviceData, id); // Call the server action
+      if (response.success && response.service) {
+        if (id) {
+          setServices(services.map(s => s.id === id ? response.service! : s));
+        } else {
+          setServices([...services, response.service]);
+        }
+        setShowForm(false);
+        setEditingService(null);
+      } else if (response.error) {
+        setError(response.error);
       }
-      setShowForm(false);
-      setEditingService(null);
     } catch (err) {
       setError('Failed to save service');
       console.error('Error saving service:', err);
@@ -56,8 +58,12 @@ export default function ServicesPage() {
   const handleDelete = async (id: string) => {
     if (window.confirm('Are you sure you want to delete this service?')) {
       try {
-        await supabaseUtils.deleteService(id);
-        setServices(services.filter(service => service.id !== id));
+        const response = await deleteServiceAction(id); // Call the server action
+        if (response.success) {
+            setServices(services.filter(service => service.id !== id));
+        } else if (response.error) {
+            setError(response.error);
+        }
       } catch (err) {
         setError('Failed to delete service');
         console.error('Error deleting service:', err);

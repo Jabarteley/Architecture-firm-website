@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { supabaseUtils, BlogPost } from '@/utils/supabase-utils';
 import ProtectedRoute from '@/components/ProtectedRoute';
 import BlogPostForm from '@/components/Admin/BlogPostForm';
+import { createOrUpdateBlogPostAction, deleteBlogPostAction } from './actions'; // Import the new server actions
 
 export default function BlogPage() {
   const [blogPosts, setBlogPosts] = useState<BlogPost[]>([]);
@@ -31,17 +32,18 @@ export default function BlogPage() {
 
   const handleSave = async (postData: Partial<BlogPost>, id?: string) => {
     try {
-      if (id) {
-        // Update existing post
-        const updatedPost = await supabaseUtils.updateBlogPost(id, postData);
-        setBlogPosts(blogPosts.map(p => p.id === id ? updatedPost : p));
-      } else {
-        // Create new post
-        const newPost = await supabaseUtils.createBlogPost(postData as Omit<BlogPost, 'id' | 'created_at' | 'updated_at'>);
-        setBlogPosts([...blogPosts, newPost]);
+      const response = await createOrUpdateBlogPostAction(postData, id); // Call the server action
+      if (response.success && response.post) {
+        if (id) {
+          setBlogPosts(blogPosts.map(p => p.id === id ? response.post! : p));
+        } else {
+          setBlogPosts([...blogPosts, response.post]);
+        }
+        setShowForm(false);
+        setEditingPost(null);
+      } else if (response.error) {
+        setError(response.error);
       }
-      setShowForm(false);
-      setEditingPost(null);
     } catch (err) {
       setError('Failed to save blog post');
       console.error('Error saving blog post:', err);
@@ -56,8 +58,12 @@ export default function BlogPage() {
   const handleDelete = async (id: string) => {
     if (window.confirm('Are you sure you want to delete this blog post?')) {
       try {
-        await supabaseUtils.deleteBlogPost(id);
-        setBlogPosts(blogPosts.filter(post => post.id !== id));
+        const response = await deleteBlogPostAction(id); // Call the server action
+        if (response.success) {
+            setBlogPosts(blogPosts.filter(post => post.id !== id));
+        } else if (response.error) {
+            setError(response.error);
+        }
       } catch (err) {
         setError('Failed to delete blog post');
         console.error('Error deleting blog post:', err);

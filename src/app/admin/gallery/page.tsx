@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { supabaseUtils, GalleryItem } from '@/utils/supabase-utils';
 import ProtectedRoute from '@/components/ProtectedRoute';
 import GalleryItemForm from '@/components/Admin/GalleryItemForm';
+import { createOrUpdateGalleryItemAction, deleteGalleryItemAction } from './actions'; // Import the new server actions
 
 export default function GalleryPage() {
   const [galleryItems, setGalleryItems] = useState<GalleryItem[]>([]);
@@ -31,17 +32,18 @@ export default function GalleryPage() {
 
   const handleSave = async (itemData: Partial<GalleryItem>, id?: string) => {
     try {
-      if (id) {
-        // Update existing item
-        const updatedItem = await supabaseUtils.updateGalleryItem(id, itemData);
-        setGalleryItems(galleryItems.map(i => i.id === id ? updatedItem : i));
-      } else {
-        // Create new item
-        const newItem = await supabaseUtils.createGalleryItem(itemData as Omit<GalleryItem, 'id' | 'created_at'>);
-        setGalleryItems([...galleryItems, newItem]);
+      const response = await createOrUpdateGalleryItemAction(itemData, id); // Call the server action
+      if (response.success && response.item) {
+        if (id) {
+          setGalleryItems(galleryItems.map(i => i.id === id ? response.item! : i));
+        } else {
+          setGalleryItems([...galleryItems, response.item]);
+        }
+        setShowForm(false);
+        setEditingItem(null);
+      } else if (response.error) {
+        setError(response.error);
       }
-      setShowForm(false);
-      setEditingItem(null);
     } catch (err) {
       setError('Failed to save gallery item');
       console.error('Error saving gallery item:', err);
@@ -56,8 +58,12 @@ export default function GalleryPage() {
   const handleDelete = async (id: string) => {
     if (window.confirm('Are you sure you want to delete this gallery item?')) {
       try {
-        await supabaseUtils.deleteGalleryItem(id);
-        setGalleryItems(galleryItems.filter(item => item.id !== id));
+        const response = await deleteGalleryItemAction(id); // Call the server action
+        if (response.success) {
+            setGalleryItems(galleryItems.filter(item => item.id !== id));
+        } else if (response.error) {
+            setError(response.error);
+        }
       } catch (err) {
         setError('Failed to delete gallery item');
         console.error('Error deleting gallery item:', err);

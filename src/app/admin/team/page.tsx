@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { supabaseUtils, TeamMember } from '@/utils/supabase-utils';
 import ProtectedRoute from '@/components/ProtectedRoute';
 import TeamMemberForm from '@/components/Admin/TeamMemberForm';
+import { createOrUpdateTeamMemberAction, deleteTeamMemberAction } from './actions'; // Import the new server actions
 
 export default function TeamPage() {
   const [teamMembers, setTeamMembers] = useState<TeamMember[]>([]);
@@ -31,17 +32,18 @@ export default function TeamPage() {
 
   const handleSave = async (memberData: Partial<TeamMember>, id?: string) => {
     try {
-      if (id) {
-        // Update existing member
-        const updatedMember = await supabaseUtils.updateTeamMember(id, memberData);
-        setTeamMembers(teamMembers.map(m => m.id === id ? updatedMember : m));
-      } else {
-        // Create new member
-        const newMember = await supabaseUtils.createTeamMember(memberData as Omit<TeamMember, 'id' | 'created_at'>);
-        setTeamMembers([...teamMembers, newMember]);
+      const response = await createOrUpdateTeamMemberAction(memberData, id); // Call the server action
+      if (response.success && response.member) {
+        if (id) {
+          setTeamMembers(teamMembers.map(m => m.id === id ? response.member! : m));
+        } else {
+          setTeamMembers([...teamMembers, response.member]);
+        }
+        setShowForm(false);
+        setEditingMember(null);
+      } else if (response.error) {
+        setError(response.error);
       }
-      setShowForm(false);
-      setEditingMember(null);
     } catch (err) {
       setError('Failed to save team member');
       console.error('Error saving team member:', err);
@@ -56,8 +58,12 @@ export default function TeamPage() {
   const handleDelete = async (id: string) => {
     if (window.confirm('Are you sure you want to delete this team member?')) {
       try {
-        await supabaseUtils.deleteTeamMember(id);
-        setTeamMembers(teamMembers.filter(member => member.id !== id));
+        const response = await deleteTeamMemberAction(id); // Call the server action
+        if (response.success) {
+            setTeamMembers(teamMembers.filter(member => member.id !== id));
+        } else if (response.error) {
+            setError(response.error);
+        }
       } catch (err) {
         setError('Failed to delete team member');
         console.error('Error deleting team member:', err);
